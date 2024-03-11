@@ -24,5 +24,4 @@ public class Theater {
     private LocalDateTime created_at;
     @UpdateTimestamp
     private LocalDateTime edited_at;
-    
 }
