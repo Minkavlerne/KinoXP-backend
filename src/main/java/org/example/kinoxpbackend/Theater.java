@@ -14,6 +14,16 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 public class Theater {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    private int id;
+
+    @Column(nullable = false)
+    private String name;
+    @CreationTimestamp
+    private LocalDateTime created_at;
+    @UpdateTimestamp
+    private LocalDateTime updated_at;
     @jakarta.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
