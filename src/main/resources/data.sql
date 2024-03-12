@@ -1,6 +1,6 @@
 USE kinoxp;
 
-INSERT INTO Movies (Title, Description, PosterBase64, PosterURL, TrailerURL, AgeLimit, Duration)
+INSERT INTO movies (Title, Description, PosterBase64, PosterURL, TrailerURL, AgeLimit, Duration)
 VALUES
     ('The Shawshank Redemption', 'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.', 'base64data1', 'https://example.com/poster1.jpg', 'https://youtube.com/trailer1', 18, '02:22:00'),
     ('The Godfather', 'The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.', 'base64data2', 'https://example.com/poster2.jpg', 'https://youtube.com/trailer2', 18, '02:55:00'),
@@ -32,4 +32,18 @@ INSERT INTO theater (created, updated, name) VALUES
      (CURRENT_TIMESTAMP(6), CURRENT_TIMESTAMP(6), 'Sal 1'),
      (CURRENT_TIMESTAMP(6), CURRENT_TIMESTAMP(6), 'Sal 2'),
      (CURRENT_TIMESTAMP(6), CURRENT_TIMESTAMP(6), 'Sal 3');
+
+INSERT INTO movie_category (movie_id, category_id) VALUES
+    (1, 3),
+    (1, 7),
+    (2, 3),
+    (2, 15),
+    (3, 3),
+    (3, 7),
+    (4, 1),
+    (4, 3),
+    (4, 7),
+    (5, 3),
+    (5, 4),
+    (5, 7);
 
