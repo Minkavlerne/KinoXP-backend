@@ -1,4 +1,4 @@
-package org.example.kinoxpbackend.kino.entity;
+package org.example.kinoxpbackend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
