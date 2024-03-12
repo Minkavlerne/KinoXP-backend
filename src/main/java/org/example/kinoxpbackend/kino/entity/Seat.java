@@ -1,4 +1,4 @@
-package org.example.kinoxpbackend;
+package org.example.kinoxpbackend.kino.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,30 +12,26 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @Entity
-public class User {
+public class Seat {
+
     @jakarta.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private int Id;
 
     @Column(nullable = false)
-    private String firstName;
+    private String rowNumber;
     @Column(nullable = false)
-    private String lastname;
+    private String seatNumber;
 
-    private String address;
+    private boolean isReserved;
 
-    private String country;
-
-    private String phone;
-
-    @Column(nullable = false, unique = true)
-    private String email;
     @Column(nullable = false)
-    private String password;
+    private String type;
 
     @CreationTimestamp
     private LocalDateTime created_at;
