@@ -19,6 +19,13 @@ public class Booking {
     @Column(nullable = false, unique = true)
     private String BookingNumber;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User userId;
+
+    @OneToOne
+    private MovieShow movieShowId;
+
     @CreationTimestamp
     private LocalDateTime created_at;
     @UpdateTimestamp

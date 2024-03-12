@@ -1,9 +1,6 @@
 package org.example.kinoxpbackend.kino.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,6 +18,13 @@ public class BookedSeat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int Id;
+
+    @OneToOne
+    private Seat seatId;
+
+    @ManyToOne
+    @JoinColumn (name = "theater_id")
+    private Theater theaterId;
 
     @CreationTimestamp
     public LocalDateTime created_at;
