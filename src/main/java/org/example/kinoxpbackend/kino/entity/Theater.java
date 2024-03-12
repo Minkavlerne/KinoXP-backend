@@ -24,14 +24,4 @@ public class Theater {
     private LocalDateTime created_at;
     @UpdateTimestamp
     private LocalDateTime updated_at;
-    @jakarta.persistence.Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
-    @Column(nullable = false, unique = true)
-    private String name;
-
-    @CreationTimestamp
-    private LocalDateTime created_at;
-    @UpdateTimestamp
-    private LocalDateTime edited_at;
 }
