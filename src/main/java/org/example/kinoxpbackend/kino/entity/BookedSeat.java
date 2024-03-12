@@ -1,4 +1,4 @@
-package org.example.kinoxpbackend;
+package org.example.kinoxpbackend.kino.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,8 +22,6 @@ public class BookedSeat {
     @Id
     private int Id;
 
- @CreationTimestamp
-    public LocalDateTime booked_at;
- @UpdateTimestamp
-    public LocalDateTime deleted_at;
+    @CreationTimestamp
+    public LocalDateTime created_at;
 }

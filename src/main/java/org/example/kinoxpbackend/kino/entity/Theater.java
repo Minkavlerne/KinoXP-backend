@@ -1,4 +1,4 @@
-package org.example.kinoxpbackend;
+package org.example.kinoxpbackend.kino.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -16,22 +16,12 @@ import java.time.LocalDateTime;
 public class Theater {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private int id;
+    private int Id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
     @CreationTimestamp
     private LocalDateTime created_at;
     @UpdateTimestamp
     private LocalDateTime updated_at;
-    @jakarta.persistence.Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
-    @Column(nullable = false, unique = true)
-    private String name;
-
-    @CreationTimestamp
-    private LocalDateTime created_at;
-    @UpdateTimestamp
-    private LocalDateTime edited_at;
 }

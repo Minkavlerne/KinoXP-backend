@@ -1,4 +1,4 @@
-package org.example.kinoxpbackend;
+package org.example.kinoxpbackend.kino.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,43 +11,35 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
-public class Movie {
-
+public class User {
     @jakarta.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private int Id;
 
-   @Column(nullable = false, unique = true)
-    private String title;
-   @Column(nullable = false)
-    private String description;
+    @Column(nullable = false)
+    private String firstName;
+    @Column(nullable = false)
+    private String lastname;
 
-   @Column(nullable = false)
-    private String posterBase64;
-   @Column(nullable = false)
-    private String posterUrl;
-   @Column(nullable = false)
-    private String trailerUrl;
+    private String address;
 
-   @Column(nullable = false)
-    private int ageLimit;
+    private String country;
 
-   @Column(nullable = false)
-    private LocalTime duration;
+    private String phone;
 
+    @Column(nullable = false, unique = true)
+    private String email;
+    @Column(nullable = false)
+    private String password;
 
-   @CreationTimestamp
+    @CreationTimestamp
     private LocalDateTime created_at;
 
-   @UpdateTimestamp
+    @UpdateTimestamp
     private LocalDateTime updated_at;
-
-
 }
