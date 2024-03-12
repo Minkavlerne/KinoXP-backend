@@ -1,7 +1,6 @@
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+package org.example.kinoxpbackend.kino.entity;
+
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,6 +29,10 @@ public class Seat {
 
     @Column(nullable = false)
     private String type;
+
+    @ManyToOne
+    @JoinColumn(name = "theater_id")
+    private Theater theater;
 
     @CreationTimestamp
     private LocalDateTime created_at;

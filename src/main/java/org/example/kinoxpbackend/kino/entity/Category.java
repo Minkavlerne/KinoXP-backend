@@ -1,4 +1,4 @@
-package org.example.kinoxpbackend;
+package org.example.kinoxpbackend.kino.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -8,30 +8,20 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
-public class Theater {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    private int id;
-
-    @Column(nullable = false)
-    private String name;
-    @CreationTimestamp
-    private LocalDateTime created_at;
-    @UpdateTimestamp
-    private LocalDateTime updated_at;
+public class Category {
     @jakarta.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
-    @Column(nullable = false, unique = true)
-    private String name;
 
+    private int Id;
+   @Column(nullable = false, unique = true)
+    private String name;
     @CreationTimestamp
-    private LocalDateTime created_at;
+    private LocalDateTime created;
     @UpdateTimestamp
-    private LocalDateTime edited_at;
+    private LocalDateTime updated;
+
 }

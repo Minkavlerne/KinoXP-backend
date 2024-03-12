@@ -1,4 +1,4 @@
-package org.example.kinoxpbackend;
+package org.example.kinoxpbackend.kino.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
