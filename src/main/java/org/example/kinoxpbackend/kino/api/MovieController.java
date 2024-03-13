@@ -1,10 +1,9 @@
 package org.example.kinoxpbackend.kino.api;
 
+import org.example.kinoxpbackend.kino.dto.MovieDto;
 import org.example.kinoxpbackend.kino.entity.Movie;
 import org.example.kinoxpbackend.kino.services.MovieService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +18,11 @@ MovieService movieService;
     @GetMapping
     public List<Movie> getAllMovies() {
         return movieService.getAllMovies();
+    }
+
+
+    @PostMapping
+    public MovieDto addMovie(@RequestBody MovieDto request) {
+        return movieService.addMovie(request);
     }
 }

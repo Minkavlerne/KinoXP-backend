@@ -22,19 +22,19 @@ public class Movie {
 
     private int Id;
 
-   @Column(nullable = false, unique = true)
+ @Column(nullable = false, unique = true)
     private String title;
    @Column(nullable = false)
     private String description;
 
-   @Column(nullable = false)
+  @Column(nullable = false)
     private String posterBase64;
-   @Column(nullable = false)
+  @Column(nullable = false)
     private String posterUrl;
-   @Column(nullable = false)
+ @Column(nullable = false)
     private String trailerUrl;
 
-   @Column(nullable = false)
+  @Column(nullable = false)
     private int ageLimit;
 
    @Column(nullable = false)
