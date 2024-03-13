@@ -1,5 +1,7 @@
 package org.example.kinoxpbackend.kino.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +13,6 @@ import java.sql.Timestamp;
 @Setter
 @NoArgsConstructor
 @Entity
-
 public class MovieShow {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,16 +21,18 @@ public class MovieShow {
     private Timestamp endTime;
     @ManyToOne
     @JoinColumn(name="movie_id")
-    private Movie movieId;
+    @JsonManagedReference
+    private Movie movie;
 
     @ManyToOne
-    @JoinColumn(name="theater_id")
+    @JoinColumn(name = "theater_id")
+    @JsonManagedReference
     private Theater theater;
 
-    public MovieShow(Timestamp startTime, Timestamp endTime, Movie movieId, Theater theater) {
+    public MovieShow(Timestamp startTime, Timestamp endTime, Movie movie, Theater theater) {
         this.startTime = startTime;
         this.endTime = endTime;
-        this.movieId = movieId;
+        this.movie = movie;
         this.theater = theater;
     }
 }
