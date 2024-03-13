@@ -3,7 +3,9 @@ package org.example.kinoxpbackend.kino.services;
 import org.example.kinoxpbackend.kino.dto.MovieDto;
 import org.example.kinoxpbackend.kino.entity.Movie;
 import org.example.kinoxpbackend.kino.repository.MovieRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -19,6 +21,12 @@ public class MovieService {
 
     public List<Movie> getAllMovies() {
         return movieRepository.findAll();
+    }
+
+    public MovieDto getMovieById(int id){
+        Movie movie = movieRepository.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie not found"));
+        return new MovieDto(movie);
     }
 public MovieDto addMovie(MovieDto request) {
 Movie movie = new Movie();

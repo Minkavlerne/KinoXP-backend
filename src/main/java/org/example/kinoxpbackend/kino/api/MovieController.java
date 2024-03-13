@@ -19,7 +19,10 @@ MovieService movieService;
     public List<Movie> getAllMovies() {
         return movieService.getAllMovies();
     }
-
+@GetMapping(path ="/{id}")
+public MovieDto getMovieById(@PathVariable int id) {
+    return movieService.getMovieById(id);
+}
 
     @PostMapping
     public MovieDto addMovie(@RequestBody MovieDto request) {
