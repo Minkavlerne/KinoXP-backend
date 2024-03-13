@@ -23,5 +23,12 @@ public class TheaterController {
     public ResponseEntity deleteTheater(@PathVariable int id) {
         return theaterService.deleteTheater(id);
     }
+
+    @PostMapping
+    public Theater addTheater(@RequestBody Theater request) {
+        return theaterService.addTheater(request);
+    }
+
+
 }
 
