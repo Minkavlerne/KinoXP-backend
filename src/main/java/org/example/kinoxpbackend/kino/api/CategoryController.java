@@ -32,4 +32,9 @@ public class CategoryController {
     public CategoryDto addCategory(@RequestBody CategoryDto request) {
         return categoryService.addCategory(request);
     }
+
+    @PutMapping("/{id}")
+    public CategoryDto editCategory(@RequestBody CategoryDto request, @PathVariable int id) {
+        return categoryService.editCategory(request, id);
+    }
 }
