@@ -1,6 +1,7 @@
 package org.example.kinoxpbackend.kino.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -55,5 +56,13 @@ public class Movie {
    @UpdateTimestamp
     private LocalDateTime updated_at;
 
-
+    public Movie(String title, String description, String posterBase64, String posterUrl, String trailerUrl, int ageLimit, LocalTime duration) {
+        this.title = title;
+        this.description = description;
+        this.posterBase64 = posterBase64;
+        this.posterUrl = posterUrl;
+        this.trailerUrl = trailerUrl;
+        this.ageLimit = ageLimit;
+        this.duration = duration;
+    }
 }
