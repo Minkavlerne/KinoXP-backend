@@ -1,9 +1,9 @@
 package org.example.kinoxpbackend.kino.api;
 
+import org.example.kinoxpbackend.kino.dto.CategoryDto;
+import org.example.kinoxpbackend.kino.entity.Category;
 import org.example.kinoxpbackend.kino.services.CategoryService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +21,10 @@ public class CategoryController {
     @GetMapping
     public List<String> getAllCategories() {
         return categoryService.getAllCategories();
+    }
+
+    @PostMapping
+    public CategoryDto addCategory(@RequestBody CategoryDto request) {
+        return categoryService.addCategory(request);
     }
 }
