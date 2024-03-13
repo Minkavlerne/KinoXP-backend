@@ -37,4 +37,12 @@ public class CategoryService {
         categoryRepository.save(category);
         return new CategoryDto(category);
     }
+
+    public CategoryDto editCategory(CategoryDto request, int id) {
+        Category categoryToEdit = categoryRepository.findById(id).orElseThrow(()
+                -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
+        categoryToEdit.setName(request.getName());
+        categoryRepository.save(categoryToEdit);
+        return new CategoryDto(categoryToEdit);
+    }
 }
