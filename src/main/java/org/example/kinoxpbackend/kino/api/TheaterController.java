@@ -2,9 +2,8 @@ package org.example.kinoxpbackend.kino.api;
 
 import org.example.kinoxpbackend.kino.entity.Theater;
 import org.example.kinoxpbackend.kino.services.TheaterService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,4 +18,23 @@ public class TheaterController {
     public List<Theater> getAllTheaters() {
         return theaterService.getAllTheaters();
     }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity deleteTheater(@PathVariable int id) {
+        return theaterService.deleteTheater(id);
+    }
+
+    @PostMapping
+    public Theater addTheater(@RequestBody Theater request) {
+        return theaterService.addTheater(request);
+    }
+    @PutMapping(path = "/{id}")
+    public Theater addTheater(@RequestBody Theater request,@PathVariable int id) {
+        return theaterService.editTheater(request,id);
+    }
+    @GetMapping(path ="/{id}")
+    public Theater getTheaterById(@PathVariable int id) {
+        return theaterService.getTheaterById(id);
+    }
 }
+

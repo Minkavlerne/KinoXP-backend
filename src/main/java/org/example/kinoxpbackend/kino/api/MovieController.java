@@ -1,10 +1,10 @@
 package org.example.kinoxpbackend.kino.api;
 
+import org.example.kinoxpbackend.kino.dto.MovieDto;
 import org.example.kinoxpbackend.kino.entity.Movie;
 import org.example.kinoxpbackend.kino.services.MovieService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +19,22 @@ MovieService movieService;
     @GetMapping
     public List<Movie> getAllMovies() {
         return movieService.getAllMovies();
+    }
+@GetMapping(path ="/{id}")
+public MovieDto getMovieById(@PathVariable int id) {
+    return movieService.getMovieById(id);
+}
+
+    @PostMapping
+    public MovieDto addMovie(@RequestBody MovieDto request) {
+        return movieService.addMovie(request);
+    }
+    @PutMapping(path = "/{id}")
+    public MovieDto editMovie(@RequestBody MovieDto request, @PathVariable int id) {
+        return movieService.editMovie(request, id);
+    }
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity deleteMovie(@PathVariable int id) {
+        return movieService.deleteMovie(id);
     }
 }
