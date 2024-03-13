@@ -23,6 +23,11 @@ public class CategoryController {
         return categoryService.getAllCategories();
     }
 
+    @GetMapping("/{id}")
+    public CategoryDto getCategoryById(@PathVariable int id) {
+        return categoryService.getCategoryById(id);
+    }
+
     @PostMapping
     public CategoryDto addCategory(@RequestBody CategoryDto request) {
         return categoryService.addCategory(request);
