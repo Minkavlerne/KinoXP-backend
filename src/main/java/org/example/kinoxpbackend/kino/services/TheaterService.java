@@ -22,5 +22,13 @@ public class TheaterService {
         theaterRepository.delete(theater);
         return new ResponseEntity(("Theater deleted"), org.springframework.http.HttpStatus.OK);
     }
+    public Theater addTheater(Theater request){
+        Theater theater = new Theater();
+        theater.setName(request.getName());
+
+        theaterRepository.save(theater);
+        return theater;
+
+    }
 }
 
