@@ -4,6 +4,7 @@ import org.example.kinoxpbackend.kino.dto.CategoryDto;
 import org.example.kinoxpbackend.kino.entity.Category;
 import org.example.kinoxpbackend.kino.services.CategoryService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{id}")
-    public CategoryDto deleteCategory(@PathVariable int id) {
+    public @ResponseEntity deleteCategory(@PathVariable int id) {
         return categoryService.deleteCategory(id);
     }
 }
