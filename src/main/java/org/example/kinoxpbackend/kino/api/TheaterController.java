@@ -32,7 +32,9 @@ public class TheaterController {
     public Theater addTheater(@RequestBody Theater request,@PathVariable int id) {
         return theaterService.editTheater(request,id);
     }
-
-
+    @GetMapping(path ="/{id}")
+    public Theater getTheaterById(@PathVariable int id) {
+        return theaterService.getTheaterById(id);
+    }
 }
 

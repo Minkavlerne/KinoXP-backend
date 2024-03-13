@@ -5,6 +5,8 @@ import org.example.kinoxpbackend.kino.repository.TheaterRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -41,5 +43,11 @@ public class TheaterService {
         theaterRepository.save(theater);
         return theater;
     }
+    public Theater getTheaterById(int id){
+        Theater theater = theaterRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Theater not found"));
+        return theater;
+
+    }
+
 }
 
