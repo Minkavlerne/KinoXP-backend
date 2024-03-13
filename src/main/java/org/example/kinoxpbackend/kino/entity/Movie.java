@@ -43,13 +43,8 @@ public class Movie {
     private LocalTime duration;
 
 
-   @ManyToMany
-    @JoinTable(
-            name = "movie_category",
-            joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id")
-    )
-    private List<Category> category;
+   @ManyToMany(mappedBy = "movies")
+    private List<Category> categories;
 
    @OneToMany(mappedBy = "movie")
    @JsonBackReference

@@ -28,7 +28,7 @@ public class Category {
             joinColumns = @JoinColumn(name = "category_id"),
             inverseJoinColumns = @JoinColumn(name = "movie_id")
     )
-    private List<Movie> movie;
+    private List<Movie> movies;
 
     @CreationTimestamp
     private LocalDateTime created;
