@@ -28,4 +28,8 @@ public MovieDto getMovieById(@PathVariable int id) {
     public MovieDto addMovie(@RequestBody MovieDto request) {
         return movieService.addMovie(request);
     }
+    @PutMapping(path = "/{id}")
+    public MovieDto editMovie(@RequestBody MovieDto request, @PathVariable int id) {
+        return movieService.editMovie(request, id);
+    }
 }

@@ -41,4 +41,19 @@ movie.setDuration(request.getDuration());
 movieRepository.save(movie);
 return new MovieDto(movie);
 }
+
+public MovieDto editMovie(MovieDto request, int id) {
+    Movie movie = movieRepository.findById(id).orElseThrow(() ->
+            new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie not found"));
+    movie.setTitle(request.getTitle());
+    movie.setDescription(request.getDescription());
+    movie.setPosterBase64(request.getPosterBase64());
+    movie.setPosterUrl(request.getPosterUrl());
+    movie.setTrailerUrl(request.getTrailerUrl());
+    movie.setAgeLimit(request.getAgeLimit());
+    movie.setDuration(request.getDuration());
+
+    movieRepository.save(movie);
+    return new MovieDto(movie);
+}
 }
