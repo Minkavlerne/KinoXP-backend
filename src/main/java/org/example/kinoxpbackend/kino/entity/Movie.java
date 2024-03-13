@@ -1,5 +1,6 @@
 package org.example.kinoxpbackend.kino.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -49,6 +50,10 @@ public class Movie {
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     private List<Category> category;
+
+   @OneToMany(mappedBy = "movie")
+   @JsonBackReference
+    private List<MovieShow> movieShows;
 
    @CreationTimestamp
     private LocalDateTime created_at;
