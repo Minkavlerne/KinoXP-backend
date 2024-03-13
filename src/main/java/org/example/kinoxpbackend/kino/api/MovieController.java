@@ -3,6 +3,7 @@ package org.example.kinoxpbackend.kino.api;
 import org.example.kinoxpbackend.kino.dto.MovieDto;
 import org.example.kinoxpbackend.kino.entity.Movie;
 import org.example.kinoxpbackend.kino.services.MovieService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,5 +32,9 @@ public MovieDto getMovieById(@PathVariable int id) {
     @PutMapping(path = "/{id}")
     public MovieDto editMovie(@RequestBody MovieDto request, @PathVariable int id) {
         return movieService.editMovie(request, id);
+    }
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity deleteMovie(@PathVariable int id) {
+        return movieService.deleteMovie(id);
     }
 }
