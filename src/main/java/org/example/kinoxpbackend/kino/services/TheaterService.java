@@ -21,6 +21,7 @@ public class TheaterService {
         public List<Theater> getAllTheaters() {
             return theaterRepository.findAll();
     }
+
     public ResponseEntity deleteTheater(int id){
         Theater theater = theaterRepository.findById(id).orElseThrow(()-> new RuntimeException("Theater not found"));
         theaterRepository.delete(theater);
