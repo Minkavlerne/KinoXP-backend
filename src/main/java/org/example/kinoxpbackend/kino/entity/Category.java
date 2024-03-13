@@ -35,5 +35,7 @@ public class Category {
     @UpdateTimestamp
     private LocalDateTime updated;
 
-
+    public Category(String name) {
+        this.name = name;
+    }
 }
