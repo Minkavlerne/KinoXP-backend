@@ -63,6 +63,9 @@ public class SecurityConfig {
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/theaters/*")).permitAll()
 
 
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.DELETE, "/movieshows/*")).permitAll()
+
+
 
 
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/movies")).permitAll()
