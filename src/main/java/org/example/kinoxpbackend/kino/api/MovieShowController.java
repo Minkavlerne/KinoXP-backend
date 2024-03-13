@@ -2,9 +2,8 @@ package org.example.kinoxpbackend.kino.api;
 
 import org.example.kinoxpbackend.kino.entity.MovieShow;
 import org.example.kinoxpbackend.kino.services.MovieShowService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +18,10 @@ public class MovieShowController {
 @GetMapping
     public List<MovieShow> getAllMovieShows() {
         return movieShowService.getAllMovieShows();
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity deleteMovieShow(@PathVariable int id) {
+        return movieShowService.deleteMovieShow(id);
     }
 }
