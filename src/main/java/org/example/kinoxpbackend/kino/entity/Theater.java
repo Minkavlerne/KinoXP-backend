@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,6 +21,10 @@ public class Theater {
 
     @Column(nullable = false)
     private String name;
+
+    @OneToMany(mappedBy = "theater")
+    private List<MovieShow> movieShows;
+
     @CreationTimestamp
     private LocalDateTime created_at;
     @UpdateTimestamp
