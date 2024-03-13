@@ -26,4 +26,10 @@ public class MovieShow {
     @JoinColumn(name="theater_id")
     private Theater theater;
 
+    public MovieShow(Timestamp startTime, Timestamp endTime, Movie movieId, Theater theater) {
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.movieId = movieId;
+        this.theater = theater;
+    }
 }

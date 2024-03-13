@@ -25,8 +25,15 @@ public class Theater {
     @OneToMany(mappedBy = "theater")
     private List<MovieShow> movieShows;
 
+    @OneToMany(mappedBy = "theater")
+    private List<Seat> seats;
+
     @CreationTimestamp
     private LocalDateTime created_at;
     @UpdateTimestamp
     private LocalDateTime updated_at;
+
+    public Theater(String name) {
+        this.name = name;
+    }
 }
