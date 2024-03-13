@@ -1,6 +1,7 @@
 package org.example.kinoxpbackend.kino.api;
 
 import org.example.kinoxpbackend.kino.entity.MovieShow;
+import org.example.kinoxpbackend.kino.entity.Theater;
 import org.example.kinoxpbackend.kino.services.MovieShowService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,5 +24,10 @@ public class MovieShowController {
     @DeleteMapping(path = "/{id}")
     public ResponseEntity deleteMovieShow(@PathVariable int id) {
         return movieShowService.deleteMovieShow(id);
+    }
+
+    @PostMapping
+    public MovieShow addMovieShow(@RequestBody MovieShow request) {
+        return movieShowService.addMovieShow(request);
     }
 }
