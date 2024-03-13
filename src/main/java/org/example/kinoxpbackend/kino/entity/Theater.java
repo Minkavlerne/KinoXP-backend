@@ -1,5 +1,6 @@
 package org.example.kinoxpbackend.kino.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,7 @@ public class Theater {
     private String name;
 
     @OneToMany(mappedBy = "theater")
+    @JsonBackReference
     private List<MovieShow> movieShows;
 
     @OneToMany(mappedBy = "theater")

@@ -4,6 +4,7 @@ import org.example.kinoxpbackend.kino.dto.CategoryDto;
 import org.example.kinoxpbackend.kino.entity.Category;
 import org.example.kinoxpbackend.kino.repository.CategoryRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -46,10 +47,10 @@ public class CategoryService {
         return new CategoryDto(categoryToEdit);
     }
 
-    public CategoryDto deleteCategory(int id) {
+    public ResponseEntity deleteCategory(int id) {
         Category categoryToDelete = categoryRepository.findById(id).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
         categoryRepository.delete(categoryToDelete);
-        return new CategoryDto(categoryToDelete);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }
