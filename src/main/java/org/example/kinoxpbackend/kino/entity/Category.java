@@ -1,5 +1,6 @@
 package org.example.kinoxpbackend.kino.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -28,7 +30,8 @@ public class Category {
             joinColumns = @JoinColumn(name = "category_id"),
             inverseJoinColumns = @JoinColumn(name = "movie_id")
     )
-    private List<Movie> movie;
+   @JsonManagedReference
+    private List<Movie> movies;
 
     @CreationTimestamp
     private LocalDateTime created;
@@ -37,5 +40,6 @@ public class Category {
 
     public Category(String name) {
         this.name = name;
+        this.movies = new ArrayList<>();
     }
 }

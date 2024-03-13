@@ -11,6 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -49,7 +50,8 @@ public class Movie {
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    private List<Category> category;
+   @JsonBackReference
+    private List<Category> categories;
 
    @OneToMany(mappedBy = "movie")
    @JsonBackReference
@@ -69,5 +71,6 @@ public class Movie {
         this.trailerUrl = trailerUrl;
         this.ageLimit = ageLimit;
         this.duration = duration;
+        this.categories = new ArrayList<>();
     }
 }

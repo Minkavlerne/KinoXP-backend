@@ -59,6 +59,14 @@ public class KinoXpBackendApplication {
 			categories.add(new Category("Fantasy"));
 			categoryRepository.saveAll(categories);
 
+			for (Movie movie: movies) {
+				for (Category category: categories) {
+					category.getMovies().add(movie);
+				}
+			}
+			categoryRepository.saveAll(categories);
+
+
 			final List<Seat> seats = new ArrayList<>();
 			for (int i = 0; i < 12; i++) {
 				for (int j = 0; j < 12; j++) {
