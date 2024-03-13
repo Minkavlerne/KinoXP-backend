@@ -2,8 +2,10 @@ package org.example.kinoxpbackend.kino.services;
 
 import org.example.kinoxpbackend.kino.entity.Theater;
 import org.example.kinoxpbackend.kino.repository.TheaterRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -29,6 +31,15 @@ public class TheaterService {
         theaterRepository.save(theater);
         return theater;
 
+    }
+    public Theater editTheater(Theater request, int id){
+        if(request.getId() != id){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You cannot change the id of the theater.");
+        }
+        Theater theater = theaterRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Theater not found"));
+        theater.setName(request.getName());
+        theaterRepository.save(theater);
+        return theater;
     }
 }
 
