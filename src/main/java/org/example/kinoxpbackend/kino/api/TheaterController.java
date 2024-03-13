@@ -28,6 +28,10 @@ public class TheaterController {
     public Theater addTheater(@RequestBody Theater request) {
         return theaterService.addTheater(request);
     }
+    @PutMapping(path = "/{id}")
+    public Theater addTheater(@RequestBody Theater request,@PathVariable int id) {
+        return theaterService.editTheater(request,id);
+    }
 
 
 }
