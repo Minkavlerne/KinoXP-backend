@@ -28,7 +28,7 @@ public class CategoryService {
     public CategoryDto getCategoryById(int id) {
         Category category = categoryRepository.findById(id).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
-        return new CategoryDto(category);
+        return new CategoryDto(category, true);
     }
 
     public CategoryDto addCategory(CategoryDto request) {
@@ -36,7 +36,7 @@ public class CategoryService {
         category.setName(request.getName());
 
         categoryRepository.save(category);
-        return new CategoryDto(category);
+        return new CategoryDto(category, false);
     }
 
     public CategoryDto editCategory(CategoryDto request, int id) {
@@ -44,7 +44,7 @@ public class CategoryService {
                 -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
         categoryToEdit.setName(request.getName());
         categoryRepository.save(categoryToEdit);
-        return new CategoryDto(categoryToEdit);
+        return new CategoryDto(categoryToEdit, false);
     }
 
     public ResponseEntity deleteCategory(int id) {

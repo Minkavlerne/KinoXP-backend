@@ -11,6 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -64,5 +65,6 @@ public class Movie {
         this.trailerUrl = trailerUrl;
         this.ageLimit = ageLimit;
         this.duration = duration;
+        this.categories = new ArrayList<>();
     }
 }
