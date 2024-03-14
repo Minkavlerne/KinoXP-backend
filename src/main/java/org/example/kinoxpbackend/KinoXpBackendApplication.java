@@ -1,10 +1,7 @@
 package org.example.kinoxpbackend;
 
 import org.example.kinoxpbackend.kino.entity.*;
-import org.example.kinoxpbackend.kino.repository.CategoryRepository;
-import org.example.kinoxpbackend.kino.repository.MovieRepository;
-import org.example.kinoxpbackend.kino.repository.MovieShowRepository;
-import org.example.kinoxpbackend.kino.repository.TheaterRepository;
+import org.example.kinoxpbackend.kino.repository.*;
 import org.example.kinoxpbackend.security.entity.Role;
 import org.example.kinoxpbackend.security.entity.UserWithRoles;
 import org.example.kinoxpbackend.security.repository.RoleRepository;
@@ -31,7 +28,7 @@ public class KinoXpBackendApplication {
 	}
 
 	@Bean
-	public CommandLineRunner importData(CategoryRepository categoryRepository, MovieRepository movieRepository, TheaterRepository theaterRepository, MovieShowRepository movieShowRepository, RoleRepository roleRepository, UserWithRolesRepository userWithRolesRepository, PasswordEncoder pwEncoder) {
+	public CommandLineRunner importData(CategoryRepository categoryRepository, MovieRepository movieRepository, TheaterRepository theaterRepository, MovieShowRepository movieShowRepository, RoleRepository roleRepository, UserWithRolesRepository userWithRolesRepository, PasswordEncoder pwEncoder, SeatRepository seatRepository) {
 		return (args) -> {
 			// import data here
 
@@ -83,12 +80,15 @@ public class KinoXpBackendApplication {
 			categoryRepository.saveAll(categories);
 
 			final List<Seat> seats = new ArrayList<>();
-			for (int i = 0; i < 12; i++) {
-				for (int j = 0; j < 12; j++) {
-					seats.add(new Seat(i, j, "NORMAL", theaters.get(0)));
+
+			for (int theater = 0; theater < 3; theater++) {
+				for (int i = 1; i <= 12; i++) {
+					for (int j = 1; j <= 12; j++) {
+						seats.add(new Seat(i, j, false, "NORMAL", theaters.get(theater)));
+					}
 				}
 			}
-
+			seatRepository.saveAll(seats);
 		};
 
 	}
