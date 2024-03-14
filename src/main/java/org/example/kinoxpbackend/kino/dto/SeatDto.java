@@ -12,10 +12,11 @@ import org.example.kinoxpbackend.kino.entity.Seat;
 @NoArgsConstructor
 @NotNull
 public class SeatDto {
-private int Id;
-private String RowName;
-private String ColumnName;
-private String type;
+    private int Id;
+    private int seatRow;
+    private int seatNumber;
+    private String type;
+    private int theaterId;
 }
 
 

@@ -19,8 +19,11 @@ public class MovieShow {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private Timestamp startTime;
+
     private Timestamp endTime;
+
     @ManyToOne
     @JoinColumn(name="movie_id")
     @JsonManagedReference
