@@ -25,6 +25,10 @@ public class BookedSeat {
     private Seat seatId;
 
     @ManyToOne
+    @JoinColumn(name = "booking_id")
+    private Booking bookingId;
+
+    @ManyToOne
     @JoinColumn (name = "theater_id")
     private Theater theaterId;
 
