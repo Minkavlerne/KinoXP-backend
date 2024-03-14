@@ -38,7 +38,7 @@ public class MovieShowController {
 
     }
     @PutMapping(path = "/{id}")
-    public MovieShowDto addTMovieShow(@RequestBody MovieShowDto request, @PathVariable int id) {
+    public MovieShowDto editMovieShow(@RequestBody MovieShowDto request, @PathVariable int id) {
     return movieShowService.editMovieShow(request,id);
 }
 }
