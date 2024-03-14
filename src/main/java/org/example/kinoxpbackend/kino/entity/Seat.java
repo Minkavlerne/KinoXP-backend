@@ -33,7 +33,6 @@ public class Seat {
     public Seat(int seatRow, int seatNumber, boolean isReserved, String type, Theater theater) {
         this.seatRow = seatRow;
         this.seatNumber = seatNumber;
-        this.isReserved = isReserved;
         this.type = type;
         this.theater = theater;
     }
