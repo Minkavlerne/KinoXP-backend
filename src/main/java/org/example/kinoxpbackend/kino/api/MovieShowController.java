@@ -1,5 +1,6 @@
 package org.example.kinoxpbackend.kino.api;
 
+import org.example.kinoxpbackend.kino.dto.MovieShowDto;
 import org.example.kinoxpbackend.kino.entity.MovieShow;
 import org.example.kinoxpbackend.kino.entity.Theater;
 import org.example.kinoxpbackend.kino.services.MovieShowService;
@@ -27,7 +28,7 @@ public class MovieShowController {
     }
 
     @PostMapping
-    public MovieShow addMovieShow(@RequestBody MovieShow request) {
+    public MovieShow addMovieShow(@RequestBody MovieShowDto request) {
         return movieShowService.addMovieShow(request);
     }
 }
