@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,6 +26,9 @@ public class Booking {
 
     @OneToOne
     private MovieShow movieShowId;
+
+    @OneToMany(mappedBy = "bookingId")
+    private List<BookedSeat> bookedSeats;
 
     @CreationTimestamp
     private LocalDateTime created_at;
