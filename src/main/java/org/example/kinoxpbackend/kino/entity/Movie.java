@@ -11,6 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -43,13 +44,8 @@ public class Movie {
     private LocalTime duration;
 
 
-   @ManyToMany
-    @JoinTable(
-            name = "movie_category",
-            joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id")
-    )
-    private List<Category> category;
+   @ManyToMany(mappedBy = "movies")
+    private List<Category> categories;
 
    @OneToMany(mappedBy = "movie")
    @JsonBackReference
@@ -69,5 +65,6 @@ public class Movie {
         this.trailerUrl = trailerUrl;
         this.ageLimit = ageLimit;
         this.duration = duration;
+        this.categories = new ArrayList<>();
     }
 }

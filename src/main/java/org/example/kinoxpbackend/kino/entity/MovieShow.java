@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
 
@@ -28,6 +30,11 @@ public class MovieShow {
     @JoinColumn(name = "theater_id")
     @JsonManagedReference
     private Theater theater;
+
+    @CreationTimestamp
+    private Timestamp created_at;
+    @UpdateTimestamp
+    private Timestamp updated_at;
 
     public MovieShow(Timestamp startTime, Timestamp endTime, Movie movie, Theater theater) {
         this.startTime = startTime;

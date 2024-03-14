@@ -21,6 +21,8 @@ public class MovieShowDto {
     private Timestamp endTime;
     private int movie;
     private int theater;
+    private Timestamp created_at;
+    private Timestamp updated_at;
 
     public MovieShowDto(MovieShow movieShow) {
         this.id = movieShow.getId();
