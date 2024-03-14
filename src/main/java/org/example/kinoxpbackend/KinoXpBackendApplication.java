@@ -5,15 +5,23 @@ import org.example.kinoxpbackend.kino.repository.CategoryRepository;
 import org.example.kinoxpbackend.kino.repository.MovieRepository;
 import org.example.kinoxpbackend.kino.repository.MovieShowRepository;
 import org.example.kinoxpbackend.kino.repository.TheaterRepository;
+import org.example.kinoxpbackend.security.entity.Role;
+import org.example.kinoxpbackend.security.entity.UserWithRoles;
+import org.example.kinoxpbackend.security.repository.RoleRepository;
+import org.example.kinoxpbackend.security.repository.UserWithRolesRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.sql.Timestamp;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @SpringBootApplication
 public class KinoXpBackendApplication {
@@ -23,9 +31,24 @@ public class KinoXpBackendApplication {
 	}
 
 	@Bean
-	public CommandLineRunner importData(CategoryRepository categoryRepository, MovieRepository movieRepository, TheaterRepository theaterRepository, MovieShowRepository movieShowRepository) {
+	public CommandLineRunner importData(CategoryRepository categoryRepository, MovieRepository movieRepository, TheaterRepository theaterRepository, MovieShowRepository movieShowRepository, RoleRepository roleRepository, UserWithRolesRepository userWithRolesRepository, PasswordEncoder pwEncoder) {
 		return (args) -> {
 			// import data here
+
+			// User roles
+			roleRepository.save(new Role("USER"));
+			roleRepository.save(new Role("ADMIN"));
+
+			String passwordUsedByAll = "test123";
+
+			UserWithRoles user1 = new UserWithRoles("user", pwEncoder.encode(passwordUsedByAll), "user1@test.dk");
+			UserWithRoles user2 = new UserWithRoles("admin", pwEncoder.encode(passwordUsedByAll), "user2@test.dk");
+			user1.addRole(roleRepository.findById("USER").orElseThrow(() -> new NoSuchElementException("Role not found")));
+			user2.addRole(roleRepository.findById("ADMIN").orElseThrow(() -> new NoSuchElementException("Role not found")));
+
+			userWithRolesRepository.save(user1);
+			userWithRolesRepository.save(user2);
+
 			final List<Movie> movies = new ArrayList<>();
 			movies.add(new Movie("The Shawshank Redemption", "Two imprisoned", "base64", "url", "url", 18, LocalTime.parse("02:22:00")));
 			movies.add(new Movie("The Godfather", "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.", "base64", "url", "url", 18, LocalTime.parse("02:22:00")));

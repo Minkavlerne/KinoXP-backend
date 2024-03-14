@@ -27,10 +27,6 @@ public class MovieShowController {
         return movieShowService.getMovieShowById(id);
     }
 
-    @DeleteMapping(path = "/{id}")
-    public ResponseEntity deleteMovieShow(@PathVariable int id) {
-        return movieShowService.deleteMovieShow(id);
-    }
 
     @PostMapping
     public MovieShow addMovieShow(@RequestBody MovieShowDto request) {
@@ -41,4 +37,8 @@ public class MovieShowController {
     public MovieShowDto editMovieShow(@RequestBody MovieShowDto request, @PathVariable int id) {
     return movieShowService.editMovieShow(request,id);
 }
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity deleteMovieShow(@PathVariable int id) {
+        return movieShowService.deleteMovieShow(id);
+    }
 }
