@@ -2,6 +2,7 @@ package org.example.kinoxpbackend.kino.services;
 
 import org.example.kinoxpbackend.kino.dto.BookingDto;
 import org.example.kinoxpbackend.kino.entity.Booking;
+import org.example.kinoxpbackend.kino.entity.MovieShow;
 import org.example.kinoxpbackend.kino.repository.BookingRepository;
 import org.example.kinoxpbackend.kino.repository.MovieShowRepository;
 import org.springframework.http.HttpStatus;
@@ -35,7 +36,12 @@ public class BookingService {
         Booking booking = new Booking();
         booking.setBookingNumber(request.getBookingNumber());
         // TODO add userId
-        movieShowRepository.findById(request.getMovieShowId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "MovieShow not found"));
 
+        MovieShow movieShow = movieShowRepository.findById(request.getMovieShowId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "MovieShow not found"));
+        booking.setMovieShowId(movieShow);
+
+        Booking savedBooking = bookingRepository.save(booking);
+        return new BookingDto(savedBooking);
     }
 }
