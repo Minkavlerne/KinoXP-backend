@@ -19,7 +19,6 @@ public class Seat {
     private int id;
     private int seatRow;
     private int seatNumber;
-    private boolean isReserved;
     private String type;
 
     @ManyToOne
@@ -31,10 +30,9 @@ public class Seat {
     @UpdateTimestamp
     private LocalDateTime updated_at;
 
-    public Seat(int seatRow, int seatNumber, boolean isReserved, String type, Theater theater) {
+    public Seat(int seatRow, int seatNumber, String type, Theater theater) {
         this.seatRow = seatRow;
         this.seatNumber = seatNumber;
-        this.isReserved = isReserved;
         this.type = type;
         this.theater = theater;
     }

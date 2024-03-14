@@ -19,8 +19,14 @@ public class BookedSeat {
     @Id
     private int Id;
 
+    private boolean isBooked;
+
     @OneToOne
     private Seat seatId;
+
+    @ManyToOne
+    @JoinColumn(name = "booking_id")
+    private Booking bookingId;
 
     @ManyToOne
     @JoinColumn (name = "theater_id")
