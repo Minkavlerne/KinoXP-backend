@@ -28,7 +28,12 @@ public class Theater {
     private List<MovieShow> movieShows;
 
     @OneToMany(mappedBy = "theater")
+    @JsonBackReference
     private List<Seat> seats;
+
+    @OneToMany(mappedBy = "theaterId")
+    @JsonBackReference
+    private List<BookedSeat> bookedSeats;
 
     @CreationTimestamp
     private LocalDateTime created_at;

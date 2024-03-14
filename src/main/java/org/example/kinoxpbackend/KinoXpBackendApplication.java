@@ -90,7 +90,5 @@ public class KinoXpBackendApplication {
 			}
 			seatRepository.saveAll(seats);
 		};
-
 	}
-
 }
