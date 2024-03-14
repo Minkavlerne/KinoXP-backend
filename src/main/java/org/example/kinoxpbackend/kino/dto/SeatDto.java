@@ -17,6 +17,14 @@ public class SeatDto {
     private int seatNumber;
     private String type;
     private int theaterId;
+
+    public SeatDto(Seat seat) {
+        this.Id = seat.getId();
+        this.seatRow = seat.getSeatRow();
+        this.seatNumber = seat.getSeatNumber();
+        this.type = seat.getType();
+        this.theaterId = seat.getTheater().getId();
+    }
 }
 
 

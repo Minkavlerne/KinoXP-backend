@@ -76,6 +76,7 @@ public class SecurityConfig {
 
             // /seats Endpoints
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/seats")).permitAll()
+            .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/seats/*")).permitAll()
 
             //This is for demo purposes only, and should be removed for a real system
             .requestMatchers(mvcMatcherBuilder.pattern(HttpMethod.GET, "/api/demo/anonymous")).permitAll()
