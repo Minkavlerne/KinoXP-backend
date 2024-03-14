@@ -44,13 +44,35 @@ public class KinoXpBackendApplication {
 			userWithRolesRepository.save(user1);
 			userWithRolesRepository.save(user2);
 
+			final List<Category> categories = new ArrayList<>();
+			categories.add(new Category("Action"));
+			categories.add(new Category("Drama"));
+			categories.add(new Category("Comedy"));
+			categories.add(new Category("Thriller"));
+			categories.add(new Category("Horror"));
+			categories.add(new Category("Romance"));
+			categories.add(new Category("Sci-Fi"));
+			categories.add(new Category("Fantasy"));
+
 			final List<Movie> movies = new ArrayList<>();
 			movies.add(new Movie("The Shawshank Redemption", "Two imprisoned", "base64", "url", "url", 18, LocalTime.parse("02:22:00")));
 			movies.add(new Movie("The Godfather", "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.", "base64", "url", "url", 18, LocalTime.parse("02:22:00")));
 			movies.add(new Movie("The Dark Knight", "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.", "base64", "url", "url", 18, LocalTime.parse("02:22:00")));
 			movies.add(new Movie("The Avengers", "The heroes of earth take on the mighty Asguardian Loki", "base64", "url", "url", 18, LocalTime.parse("02:22:00")));
 			movies.add(new Movie("Inception", "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.", "base64", "url", "url", 18, LocalTime.parse("02:22:00")));
-			movieRepository.saveAll(movies);
+
+			for (Movie movie: movies) {
+				movie.setCategories(new ArrayList<>(categories));
+				movieRepository.save(movie);
+
+				for (Category category: categories) {
+					category.getMovies().add(movie);
+
+					categoryRepository.save(category);
+				}
+			}
+
+
 
 			final List<Theater> theaters = new ArrayList<>();
 			theaters.add(new Theater("The big one"));
@@ -66,19 +88,8 @@ public class KinoXpBackendApplication {
 			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-10 12:30:00"), Timestamp.valueOf("2024-03-10 14:30:00"), movies.get(4), theaters.get(1)));
 			movieShowRepository.saveAll(movieShows);
 
-			final List<Category> categories = new ArrayList<>();
-			categories.add(new Category("Action"));
-			categories.add(new Category("Drama"));
-			categories.add(new Category("Comedy"));
-			categories.add(new Category("Thriller"));
-			categories.add(new Category("Horror"));
-			categories.add(new Category("Romance"));
-			categories.add(new Category("Sci-Fi"));
-			categories.add(new Category("Fantasy"));
-			categoryRepository.saveAll(categories);
 
 			final List<Seat> seats = new ArrayList<>();
-
 			for (int theater = 0; theater < 3; theater++) {
 				for (int i = 1; i <= 12; i++) {
 					for (int j = 1; j <= 12; j++) {

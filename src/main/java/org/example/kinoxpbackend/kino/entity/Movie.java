@@ -1,6 +1,7 @@
 package org.example.kinoxpbackend.kino.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,41 +21,40 @@ import java.util.List;
 @Entity
 public class Movie {
 
-    @jakarta.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private int Id;
 
- @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true)
     private String title;
-   @Column(nullable = false)
+    @Column(nullable = false)
     private String description;
 
-  @Column(nullable = false)
+    @Column(nullable = false)
     private String posterBase64;
-  @Column(nullable = false)
+    @Column(nullable = false)
     private String posterUrl;
- @Column(nullable = false)
+    @Column(nullable = false)
     private String trailerUrl;
 
-  @Column(nullable = false)
+    @Column(nullable = false)
     private int ageLimit;
 
-   @Column(nullable = false)
+    @Column(nullable = false)
     private LocalTime duration;
 
-
-   @ManyToMany(mappedBy = "movies")
+    @ManyToMany(mappedBy = "movies")
+    @JsonBackReference
     private List<Category> categories;
 
-   @OneToMany(mappedBy = "movie")
-   @JsonBackReference
+    @OneToMany(mappedBy = "movie")
+    @JsonBackReference
     private List<MovieShow> movieShows;
 
-   @CreationTimestamp
+    @CreationTimestamp
     private LocalDateTime created_at;
 
-   @UpdateTimestamp
+    @UpdateTimestamp
     private LocalDateTime updated_at;
 
     public Movie(String title, String description, String posterBase64, String posterUrl, String trailerUrl, int ageLimit, LocalTime duration) {

@@ -20,8 +20,8 @@ public class MovieService {
         this.movieRepository = movieRepository;
     }
 
-    public List<Movie> getAllMovies() {
-        return movieRepository.findAll();
+    public List<MovieDto> getAllMovies() {
+        return movieRepository.findAll().stream().map(MovieDto::new).collect(toList());
     }
 
     public MovieDto getMovieById(int id){

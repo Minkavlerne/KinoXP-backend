@@ -1,5 +1,6 @@
 package org.example.kinoxpbackend.kino.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -19,14 +21,15 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private int Id;
-   @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true)
     private String name;
 
-   @ManyToMany
+    @ManyToMany
+    @JsonManagedReference
     @JoinTable(
-            name = "movie_category",
-            joinColumns = @JoinColumn(name = "category_id"),
-            inverseJoinColumns = @JoinColumn(name = "movie_id")
+        name = "movie_category",
+        joinColumns = @JoinColumn(name = "category_id"),
+        inverseJoinColumns = @JoinColumn(name = "movie_id")
     )
     private List<Movie> movies;
 
@@ -37,5 +40,6 @@ public class Category {
 
     public Category(String name) {
         this.name = name;
+        this.movies = new ArrayList<>();
     }
 }
