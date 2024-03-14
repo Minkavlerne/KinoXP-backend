@@ -22,6 +22,11 @@ public class MovieShowController {
         return movieShowService.getAllMovieShows();
     }
 
+    @GetMapping(path ="/{id}")
+    public MovieShow getMovieShowById(@PathVariable int id) {
+        return movieShowService.getMovieShowById(id);
+    }
+
     @DeleteMapping(path = "/{id}")
     public ResponseEntity deleteMovieShow(@PathVariable int id) {
         return movieShowService.deleteMovieShow(id);
@@ -30,5 +35,10 @@ public class MovieShowController {
     @PostMapping
     public MovieShow addMovieShow(@RequestBody MovieShowDto request) {
         return movieShowService.addMovieShow(request);
+
     }
+    @PutMapping(path = "/{id}")
+    public MovieShowDto addTMovieShow(@RequestBody MovieShowDto request, @PathVariable int id) {
+    return movieShowService.editMovieShow(request,id);
+}
 }
