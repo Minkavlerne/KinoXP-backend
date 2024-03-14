@@ -9,6 +9,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -27,9 +29,9 @@ public class Seat {
     @JsonBackReference
     private Theater theater;
 
-    @OneToOne(mappedBy = "seatId")
+    @OneToMany(mappedBy = "seat")
     @JsonBackReference
-    private BookedSeat bookedSeat;
+    private List<BookedSeat> bookedSeat;
 
     @CreationTimestamp
     private LocalDateTime created_at;
@@ -41,5 +43,6 @@ public class Seat {
         this.seatNumber = seatNumber;
         this.type = type;
         this.theater = theater;
+        this.bookedSeat = new ArrayList<>();
     }
 }

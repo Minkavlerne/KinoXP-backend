@@ -22,7 +22,7 @@ public class BookingDto {
         this.bookingNumber = b.getBookingNumber();
         this.userId = b.getUserId().getId();
         this.movieShowId = b.getMovieShowId().getId();
-        this.bookedSeats = b.getBookedSeats().stream().map(bs -> bs.getSeatId().getId()).toList();
+        this.bookedSeats = b.getBookedSeats().stream().map(bs -> bs.getSeat().getId()).toList();
     }
 
 }

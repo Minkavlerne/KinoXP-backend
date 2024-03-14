@@ -10,15 +10,13 @@ import org.example.kinoxpbackend.kino.entity.BookedSeat;
 @NoArgsConstructor
 public class BookedSeatDto {
     private int id;
-    private boolean isBooked;
     private int seatId;
     private int bookingId;
     private int theaterId;
 
     public BookedSeatDto(BookedSeat bs) {
+        this.seatId = bs.getSeat().getId();
         this.id = bs.getId();
-        this.isBooked = bs.isBooked();
-        this.seatId = bs.getSeatId().getId();
         this.bookingId = bs.getBookingId().getId();
         this.theaterId = bs.getTheaterId().getId();
     }
