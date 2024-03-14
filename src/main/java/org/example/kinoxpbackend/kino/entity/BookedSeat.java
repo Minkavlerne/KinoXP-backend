@@ -19,6 +19,8 @@ public class BookedSeat {
     @Id
     private int Id;
 
+    private boolean isBooked;
+
     @OneToOne
     private Seat seatId;
 

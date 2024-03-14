@@ -19,7 +19,6 @@ public class Seat {
     private int id;
     private int seatRow;
     private int seatNumber;
-    private boolean isReserved;
     private String type;
 
     @ManyToOne
