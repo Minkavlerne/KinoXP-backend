@@ -62,7 +62,7 @@ public class KinoXpBackendApplication {
 			final List<Seat> seats = new ArrayList<>();
 			for (int i = 0; i < 12; i++) {
 				for (int j = 0; j < 12; j++) {
-					seats.add(new Seat(i, j, false, "NORMAL", theaters.get(0)));
+					seats.add(new Seat(i, j, "NORMAL", theaters.get(0)));
 				}
 			}
 
