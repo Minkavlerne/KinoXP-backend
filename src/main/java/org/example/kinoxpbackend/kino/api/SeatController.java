@@ -1,6 +1,7 @@
 package org.example.kinoxpbackend.kino.api;
 
 
+import org.example.kinoxpbackend.kino.dto.SeatDto;
 import org.example.kinoxpbackend.kino.entity.Seat;
 import org.example.kinoxpbackend.kino.services.SeatService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,8 +18,9 @@ public class SeatController {
     public SeatController(SeatService seatService) {
         this.seatService = seatService;
     }
+
     @GetMapping
-    public List<Seat> getAllSeats() {
+    public List<SeatDto> getAllSeats() {
         return seatService.getAllSeats();
     }
 }
