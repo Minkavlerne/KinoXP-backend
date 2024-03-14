@@ -3,6 +3,7 @@ package org.example.kinoxpbackend.kino.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
 public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +21,7 @@ public class Booking {
     private int Id;
 
     @Column(nullable = false, unique = true)
-    private String BookingNumber;
+    private String bookingNumber;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -38,7 +40,7 @@ public class Booking {
     private LocalDateTime updated_at;
 
     public Booking(String bookingNumber, User userId, MovieShow movieShowId, List<BookedSeat> bookedSeats) {
-        BookingNumber = bookingNumber;
+        this.bookingNumber = bookingNumber;
         this.userId = userId;
         this.movieShowId = movieShowId;
         this.bookedSeats = bookedSeats;
