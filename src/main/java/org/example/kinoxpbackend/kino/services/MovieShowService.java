@@ -25,30 +25,49 @@ public class MovieShowService {
         this.movieRepository = movieRepository;
         this.theaterRepository = theaterRepository;
     }
+
     public List<MovieShow> getAllMovieShows() {
         return movieShowRepository.findAll();
     }
 
+    public MovieShow getMovieShowById(int id) {
+        return movieShowRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "MovieShow not found"));
+    }
 
-    public ResponseEntity deleteMovieShow(int id){
-        MovieShow movieShow = movieShowRepository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"MovieShow not found"));
+    public ResponseEntity deleteMovieShow(int id) {
+        MovieShow movieShow = movieShowRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "MovieShow not found"));
         movieShowRepository.delete(movieShow);
         return new ResponseEntity(("Movie Show deleted"), org.springframework.http.HttpStatus.OK);
     }
-    public MovieShow addMovieShow(MovieShowDto request){
-        MovieShow movieShow = new MovieShow();
-        movieShow.setStartTime(request.getStartTime());
-        movieShow.setEndTime(request.getEndTime());
 
-        Movie movie = movieRepository.findById(request.getMovie()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie not found"));
-        movieShow.setMovie(movie);
-        Theater theater = theaterRepository.findById(request.getTheater()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Theater not found"));
-        movieShow.setTheater(theater);
+    public MovieShow addMovieShow(MovieShowDto request) {
+        MovieShow movieShow = new MovieShow();
+        updateMovieShow(movieShow, request);
 
         movieShowRepository.save(movieShow);
         return movieShow;
 
     }
 
+    public MovieShowDto editMovieShow(MovieShowDto request, int id) {
+        if (request.getId() != id) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You cannot change the id of the movie Show.");
+        }
+        MovieShow movieShow = movieShowRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "MovieShow not found"));
+       updateMovieShow(movieShow, request);
 
+        movieShowRepository.save(movieShow);
+        return new MovieShowDto(movieShow);
+
+
+    }
+
+    private void updateMovieShow(MovieShow orginal, MovieShowDto request) {
+        orginal.setStartTime(request.getStartTime());
+        orginal.setEndTime(request.getEndTime());
+        Movie movie = movieRepository.findById(request.getMovie()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie not found"));
+        orginal.setMovie(movie);
+        Theater theater = theaterRepository.findById(request.getTheater()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Theater not found"));
+        orginal.setTheater(theater);
+    }
 }
