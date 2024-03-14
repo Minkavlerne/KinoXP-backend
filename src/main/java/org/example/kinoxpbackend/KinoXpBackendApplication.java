@@ -73,7 +73,6 @@ public class KinoXpBackendApplication {
 			}
 
 
-
 			final List<Theater> theaters = new ArrayList<>();
 			theaters.add(new Theater("The big one"));
 			theaters.add(new Theater("The medium one"));
@@ -89,15 +88,23 @@ public class KinoXpBackendApplication {
 			movieShowRepository.saveAll(movieShows);
 
 
-			final List<Seat> seats = new ArrayList<>();
-			for (int theater = 0; theater < 3; theater++) {
+			for (Theater theater: theaters) {
+				List<Seat> theaterSeats = new ArrayList<>();
 				for (int i = 1; i <= 12; i++) {
 					for (int j = 1; j <= 12; j++) {
-						seats.add(new Seat(i, j, "NORMAL", theaters.get(theater)));
+						Seat seat = new Seat(i, j, "NORMAL", theater);
+						seatRepository.save(seat);
+						theaterSeats.add(seat);
 					}
 				}
+				theater.setSeats(theaterSeats);
 			}
-			seatRepository.saveAll(seats);
+			theaterRepository.saveAll(theaters);
+
+			final List<BookedSeat> bookedSeats = new ArrayList<>();
+
+			final List<Booking> bookings = new ArrayList<>();
+
 		};
 	}
 }

@@ -1,5 +1,6 @@
 package org.example.kinoxpbackend.kino.api;
 
+import org.example.kinoxpbackend.kino.dto.TheaterDto;
 import org.example.kinoxpbackend.kino.entity.Theater;
 import org.example.kinoxpbackend.kino.services.TheaterService;
 import org.springframework.http.ResponseEntity;
@@ -19,22 +20,25 @@ public class TheaterController {
         return theaterService.getAllTheaters();
     }
 
-    @DeleteMapping(path = "/{id}")
-    public ResponseEntity deleteTheater(@PathVariable int id) {
-        return theaterService.deleteTheater(id);
+    @GetMapping(path ="/{id}")
+    public Theater getTheaterById(@PathVariable int id) {
+        return theaterService.getTheaterById(id);
     }
 
     @PostMapping
     public Theater addTheater(@RequestBody Theater request) {
         return theaterService.addTheater(request);
     }
+
     @PutMapping(path = "/{id}")
     public Theater addTheater(@RequestBody Theater request,@PathVariable int id) {
         return theaterService.editTheater(request,id);
     }
-    @GetMapping(path ="/{id}")
-    public Theater getTheaterById(@PathVariable int id) {
-        return theaterService.getTheaterById(id);
+
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity deleteTheater(@PathVariable int id) {
+        return theaterService.deleteTheater(id);
     }
 }
 

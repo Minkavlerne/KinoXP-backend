@@ -17,13 +17,17 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 public class Category {
-    @jakarta.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    private int Id;
+    private int id;
     @Column(nullable = false, unique = true)
     private String name;
+    @CreationTimestamp
+    private LocalDateTime created_at;
+    @UpdateTimestamp
+    private LocalDateTime updated_at;
 
+    // Relations
     @ManyToMany
     @JsonManagedReference
     @JoinTable(
@@ -33,10 +37,6 @@ public class Category {
     )
     private List<Movie> movies;
 
-    @CreationTimestamp
-    private LocalDateTime created_at;
-    @UpdateTimestamp
-    private LocalDateTime updated_at;
 
     public Category(String name) {
         this.name = name;
