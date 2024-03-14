@@ -20,11 +20,10 @@ public class BookedSeat {
     @Id
     private int Id;
 
-    private boolean isBooked;
-
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "seat_id")
     @JsonManagedReference
-    private Seat seatId;
+    private Seat seat;
 
     @ManyToOne
     @JsonManagedReference
@@ -39,9 +38,8 @@ public class BookedSeat {
     @CreationTimestamp
     public LocalDateTime created_at;
 
-    public BookedSeat(boolean isBooked, Seat seatId, Theater theaterId) {
-        this.isBooked = isBooked;
-        this.seatId = seatId;
+    public BookedSeat(Seat seat, Theater theaterId) {
+        this.seat = seat;
         this.theaterId = theaterId;
     }
 }

@@ -24,6 +24,11 @@ public class MovieShow {
 
     private Timestamp endTime;
 
+    @CreationTimestamp
+    private Timestamp created_at;
+    @UpdateTimestamp
+    private Timestamp updated_at;
+
     @ManyToOne
     @JoinColumn(name="movie_id")
     @JsonManagedReference
@@ -34,10 +39,6 @@ public class MovieShow {
     @JsonManagedReference
     private Theater theater;
 
-    @CreationTimestamp
-    private Timestamp created_at;
-    @UpdateTimestamp
-    private Timestamp updated_at;
 
     public MovieShow(Timestamp startTime, Timestamp endTime, Movie movie, Theater theater) {
         this.startTime = startTime;
