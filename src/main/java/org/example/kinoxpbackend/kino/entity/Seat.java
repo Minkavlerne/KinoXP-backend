@@ -1,5 +1,6 @@
 package org.example.kinoxpbackend.kino.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +24,12 @@ public class Seat {
 
     @ManyToOne
     @JoinColumn(name = "theater_id")
+    @JsonBackReference
     private Theater theater;
+
+    @OneToOne(mappedBy = "seatId")
+    @JsonBackReference
+    private BookedSeat bookedSeat;
 
     @CreationTimestamp
     private LocalDateTime created_at;

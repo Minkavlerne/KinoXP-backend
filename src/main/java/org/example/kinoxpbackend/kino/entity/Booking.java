@@ -1,5 +1,6 @@
 package org.example.kinoxpbackend.kino.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,10 +29,18 @@ public class Booking {
     private MovieShow movieShowId;
 
     @OneToMany(mappedBy = "bookingId")
+    @JsonBackReference
     private List<BookedSeat> bookedSeats;
 
     @CreationTimestamp
     private LocalDateTime created_at;
     @UpdateTimestamp
     private LocalDateTime updated_at;
+
+    public Booking(String bookingNumber, User userId, MovieShow movieShowId, List<BookedSeat> bookedSeats) {
+        BookingNumber = bookingNumber;
+        this.userId = userId;
+        this.movieShowId = movieShowId;
+        this.bookedSeats = bookedSeats;
+    }
 }

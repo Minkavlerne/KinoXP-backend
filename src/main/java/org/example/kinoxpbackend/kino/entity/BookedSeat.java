@@ -1,5 +1,6 @@
 package org.example.kinoxpbackend.kino.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,16 +23,25 @@ public class BookedSeat {
     private boolean isBooked;
 
     @OneToOne
+    @JsonManagedReference
     private Seat seatId;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "booking_id")
     private Booking bookingId;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn (name = "theater_id")
     private Theater theaterId;
 
     @CreationTimestamp
     public LocalDateTime created_at;
+
+    public BookedSeat(boolean isBooked, Seat seatId, Theater theaterId) {
+        this.isBooked = isBooked;
+        this.seatId = seatId;
+        this.theaterId = theaterId;
+    }
 }
