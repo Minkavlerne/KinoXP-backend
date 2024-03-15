@@ -20,4 +20,9 @@ public class CategoryController {
     public ResponseEntity<List<CategoryDto>> getAllCategories(){
         return ResponseEntity.ok(categoryService.getAllCategories());
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CategoryDto> getCategoryById(@PathVariable int id){
+        return ResponseEntity.ok(categoryService.getCategoryById(id));
+    }
 }
