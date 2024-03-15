@@ -22,4 +22,9 @@ public class MovieController {
     public ResponseEntity<List<MovieDto>> getAllMovies() {
         return ResponseEntity.ok(movieService.getAllMovies());
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<MovieDto> getMovieById(@PathVariable int id) {
+        return ResponseEntity.ok(movieService.getMovieById(id));
+    }
 }

@@ -29,4 +29,9 @@ public class MovieService {
         List<Movie> movies = movieRepository.findAll();
         return movies.stream().map(MovieDto::new).collect(toList());
     }
+
+    public MovieDto getMovieById(int id) {
+        Movie movie = movieRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie not found"));
+        return new MovieDto(movie);
+    }
 }
