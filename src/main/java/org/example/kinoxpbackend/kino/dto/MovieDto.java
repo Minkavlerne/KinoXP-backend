@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.example.kinoxpbackend.kino.entity.Category;
 import org.example.kinoxpbackend.kino.entity.Movie;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class MovieDto {
     private String trailerUrl;
     private int ageLimit;
     private LocalTime duration;
-    private String releaseDate;
+    private LocalDate releaseDate;
     private List<String> categories;
 
     public MovieDto(Movie movie) {
@@ -37,7 +38,7 @@ public class MovieDto {
         this.trailerUrl = movie.getTrailerUrl();
         this.ageLimit = movie.getAgeLimit();
         this.duration = movie.getDuration();
-        this.releaseDate = movie.getReleaseDate().toString();
+        this.releaseDate = movie.getReleaseDate();
         this.categories = movie.getCategories().stream().map(Category::getName).toList();
 
     }
