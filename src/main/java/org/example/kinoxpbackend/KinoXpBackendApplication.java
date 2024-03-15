@@ -53,6 +53,10 @@ public class KinoXpBackendApplication {
 			categories.add(new Category("Romance"));
 			categories.add(new Category("Sci-Fi"));
 			categories.add(new Category("Fantasy"));
+			categories.add(new Category("Animation"));
+			categories.add(new Category("Family"));
+			categories.add(new Category("Mystery"));
+			categoryRepository.saveAll(categories);
 
 			final List<Movie> movies = new ArrayList<>();
 			movies.add(new Movie("The Shawshank Redemption", "Two imprisoned", "base64", "url", "url", 18, LocalTime.parse("02:22:00")));
@@ -61,49 +65,43 @@ public class KinoXpBackendApplication {
 			movies.add(new Movie("The Avengers", "The heroes of earth take on the mighty Asguardian Loki", "base64", "url", "url", 18, LocalTime.parse("02:22:00")));
 			movies.add(new Movie("Inception", "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.", "base64", "url", "url", 18, LocalTime.parse("02:22:00")));
 
+			// Add categories to movies and save in movie_category table
 			for (Movie movie: movies) {
-				movie.setCategories(new ArrayList<>(categories));
-				movieRepository.save(movie);
-
-				for (Category category: categories) {
-					category.getMovies().add(movie);
-
-					categoryRepository.save(category);
-				}
+				movie.setCategories(categories);
 			}
-
+			movieRepository.saveAll(movies);
 
 			final List<Theater> theaters = new ArrayList<>();
 			theaters.add(new Theater("The big one"));
 			theaters.add(new Theater("The medium one"));
 			theaters.add(new Theater("The small one"));
 			theaterRepository.saveAll(theaters);
-
-			final List<MovieShow> movieShows = new ArrayList<>();
-			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-10 12:30:00"), Timestamp.valueOf("2024-03-10 14:30:00"), movies.get(0), theaters.get(0)));
-			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-10 15:30:00"), Timestamp.valueOf("2024-03-10 17:30:00"), movies.get(1), theaters.get(1)));
-			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-10 18:30:00"), Timestamp.valueOf("2024-03-10 20:30:00"), movies.get(2), theaters.get(2)));
-			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-10 21:30:00"), Timestamp.valueOf("2024-03-10 23:30:00"), movies.get(3), theaters.get(0)));
-			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-10 12:30:00"), Timestamp.valueOf("2024-03-10 14:30:00"), movies.get(4), theaters.get(1)));
-			movieShowRepository.saveAll(movieShows);
-
-
-			for (Theater theater: theaters) {
-				List<Seat> theaterSeats = new ArrayList<>();
-				for (int i = 1; i <= 12; i++) {
-					for (int j = 1; j <= 12; j++) {
-						Seat seat = new Seat(i, j, "NORMAL", theater);
-						seatRepository.save(seat);
-						theaterSeats.add(seat);
-					}
-				}
-				theater.setSeats(theaterSeats);
-			}
-			theaterRepository.saveAll(theaters);
-
-			final List<BookedSeat> bookedSeats = new ArrayList<>();
-
-			final List<Booking> bookings = new ArrayList<>();
+//
+//			final List<MovieShow> movieShows = new ArrayList<>();
+//			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-10 12:30:00"), Timestamp.valueOf("2024-03-10 14:30:00"), movies.get(0), theaters.get(0)));
+//			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-10 15:30:00"), Timestamp.valueOf("2024-03-10 17:30:00"), movies.get(1), theaters.get(1)));
+//			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-10 18:30:00"), Timestamp.valueOf("2024-03-10 20:30:00"), movies.get(2), theaters.get(2)));
+//			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-10 21:30:00"), Timestamp.valueOf("2024-03-10 23:30:00"), movies.get(3), theaters.get(0)));
+//			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-10 12:30:00"), Timestamp.valueOf("2024-03-10 14:30:00"), movies.get(4), theaters.get(1)));
+//			movieShowRepository.saveAll(movieShows);
+//
+//
+//			for (Theater theater: theaters) {
+//				List<Seat> theaterSeats = new ArrayList<>();
+//				for (int i = 1; i <= 12; i++) {
+//					for (int j = 1; j <= 12; j++) {
+//						Seat seat = new Seat(i, j, "NORMAL", theater);
+//						seatRepository.save(seat);
+//						theaterSeats.add(seat);
+//					}
+//				}
+//				theater.setSeats(theaterSeats);
+//			}
+//			theaterRepository.saveAll(theaters);
+//
+//			final List<BookedSeat> bookedSeats = new ArrayList<>();
+//
+//			final List<Booking> bookings = new ArrayList<>();
 
 		};
 	}

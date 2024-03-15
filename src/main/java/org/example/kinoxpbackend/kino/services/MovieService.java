@@ -1,5 +1,7 @@
 package org.example.kinoxpbackend.kino.services;
 
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import org.example.kinoxpbackend.kino.dto.MovieDto;
 import org.example.kinoxpbackend.kino.entity.Category;
 import org.example.kinoxpbackend.kino.entity.Movie;
@@ -18,10 +20,12 @@ import static java.util.stream.Collectors.toList;
 public class MovieService {
     private final MovieRepository movieRepository;
     private final CategoryRepository categoryRepository;
+    private final EntityManager entityManager;
 
-    public MovieService(MovieRepository movieRepository, CategoryRepository categoryRepository) {
+    public MovieService(MovieRepository movieRepository, CategoryRepository categoryRepository, EntityManager entityManager) {
         this.movieRepository = movieRepository;
         this.categoryRepository = categoryRepository;
+        this.entityManager = entityManager;
     }
 
     public List<MovieDto> getAllMovies() {
@@ -33,6 +37,7 @@ public class MovieService {
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie not found"));
         return new MovieDto(movie);
     }
+    @Transactional
     public MovieDto addMovie(MovieDto request) {
         Movie movie = new Movie();
         movie.setTitle(request.getTitle());
@@ -42,12 +47,14 @@ public class MovieService {
         movie.setTrailerUrl(request.getTrailerUrl());
         movie.setAgeLimit(request.getAgeLimit());
         movie.setDuration(request.getDuration());
-        movie.setCategories(convertToCategoryEntities(request.getCategories()));
+        List<Category> categories = request.getCategories().stream().map(name -> categoryRepository.findByName(name).map(entityManager::merge).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"))).collect(toList());
+        movie.setCategories(categories);
 
         movieRepository.save(movie);
         return new MovieDto(movie);
     }
 
+    @Transactional
     public MovieDto editMovie(MovieDto request, int id) {
         Movie movie = movieRepository.findById(id).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie not found"));
@@ -58,7 +65,8 @@ public class MovieService {
         movie.setTrailerUrl(request.getTrailerUrl());
         movie.setAgeLimit(request.getAgeLimit());
         movie.setDuration(request.getDuration());
-        movie.setCategories(convertToCategoryEntities(request.getCategories()));
+        List<Category> categories = request.getCategories().stream().map(name -> categoryRepository.findByName(name).map(entityManager::merge).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"))).collect(toList());
+        movie.setCategories(categories);
 
         movieRepository.save(movie);
         return new MovieDto(movie);

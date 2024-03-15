@@ -42,14 +42,21 @@ public class Movie {
     @UpdateTimestamp
     private LocalDateTime updated_at;
 
+    // Relations
 
-    @ManyToMany(mappedBy = "movies")
-    @JsonBackReference
-    private List<Category> categories;
+    @ManyToMany(cascade = {CascadeType.MERGE})
+    @JoinTable(
+            name = "movie_category",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    @JsonManagedReference
+    private List<Category> categories = new ArrayList<>();
+
 
     @OneToMany(mappedBy = "movie")
     @JsonBackReference
-    private List<MovieShow> movieShows;
+    private List<MovieShow> movieShows = new ArrayList<>();
 
 
     public Movie(String title, String description, String posterBase64, String posterUrl, String trailerUrl, int ageLimit, LocalTime duration) {
@@ -60,7 +67,5 @@ public class Movie {
         this.trailerUrl = trailerUrl;
         this.ageLimit = ageLimit;
         this.duration = duration;
-        this.categories = new ArrayList<>();
-        this.movieShows = new ArrayList<>();
     }
 }
