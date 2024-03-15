@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class KinoXpBackendApplication {
 	}
 
 	@Bean
-	public CommandLineRunner importData(CategoryRepository categoryRepository, MovieRepository movieRepository, TheaterRepository theaterRepository, MovieShowRepository movieShowRepository, RoleRepository roleRepository, UserWithRolesRepository userWithRolesRepository, PasswordEncoder pwEncoder, SeatRepository seatRepository) {
+	public CommandLineRunner importData(CategoryRepository categoryRepository, MovieRepository movieRepository, TheaterRepository theaterRepository, MovieShowRepository movieShowRepository, RoleRepository roleRepository, UserWithRolesRepository userWithRolesRepository, PasswordEncoder pwEncoder, SeatRepository seatRepository, BookingRepository bookingRepository) {
 		return (args) -> {
 			// import data here
 
@@ -44,64 +45,28 @@ public class KinoXpBackendApplication {
 			userWithRolesRepository.save(user1);
 			userWithRolesRepository.save(user2);
 
-			final List<Category> categories = new ArrayList<>();
+			List<Category> categories = new ArrayList<>();
 			categories.add(new Category("Action"));
-			categories.add(new Category("Drama"));
 			categories.add(new Category("Comedy"));
-			categories.add(new Category("Thriller"));
+			categories.add(new Category("Drama"));
 			categories.add(new Category("Horror"));
 			categories.add(new Category("Romance"));
-			categories.add(new Category("Sci-Fi"));
-			categories.add(new Category("Fantasy"));
-			categories.add(new Category("Animation"));
-			categories.add(new Category("Family"));
-			categories.add(new Category("Mystery"));
 			categoryRepository.saveAll(categories);
 
-			final List<Movie> movies = new ArrayList<>();
-			movies.add(new Movie("The Shawshank Redemption", "Two imprisoned", "base64", "url", "url", 18, LocalTime.parse("02:22:00")));
-			movies.add(new Movie("The Godfather", "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.", "base64", "url", "url", 18, LocalTime.parse("02:22:00")));
-			movies.add(new Movie("The Dark Knight", "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.", "base64", "url", "url", 18, LocalTime.parse("02:22:00")));
-			movies.add(new Movie("The Avengers", "The heroes of earth take on the mighty Asguardian Loki", "base64", "url", "url", 18, LocalTime.parse("02:22:00")));
-			movies.add(new Movie("Inception", "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.", "base64", "url", "url", 18, LocalTime.parse("02:22:00")));
 
-			// Add categories to movies and save in movie_category table
+			List<Movie> movies = new ArrayList<>();
+			movies.add(new Movie("The Matrix", "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.", "posterbase64", "posterUrl", "trailerUrl", 16, LocalTime.of(2, 16, 10, 0), LocalDate.of(1999, 5, 7)));
+			movies.add(new Movie("The Shawshank Redemption", "Two imprisoned men bond over a number of years", "posterbase64", "posterUrl", "trailerUrl", 16, LocalTime.of(2, 22, 10, 0), LocalDate.of(1995, 4, 28)));
+			movies.add(new Movie("The Godfather", "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.", "posterbase64", "posterUrl", "trailerUrl", 16, LocalTime.of(2, 55, 10, 0), LocalDate.of(1972, 3, 24)));
+			movies.add(new Movie("The Dark Knight", "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.", "posterbase64", "posterUrl", "trailerUrl", 16, LocalTime.of(2, 32, 10, 0), LocalDate.of(2008, 7, 18)));
+
 			for (Movie movie: movies) {
 				movie.setCategories(categories);
+				movieRepository.save(movie);
 			}
-			movieRepository.saveAll(movies);
 
-			final List<Theater> theaters = new ArrayList<>();
-			theaters.add(new Theater("The big one"));
-			theaters.add(new Theater("The medium one"));
-			theaters.add(new Theater("The small one"));
-			theaterRepository.saveAll(theaters);
-//
-//			final List<MovieShow> movieShows = new ArrayList<>();
-//			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-10 12:30:00"), Timestamp.valueOf("2024-03-10 14:30:00"), movies.get(0), theaters.get(0)));
-//			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-10 15:30:00"), Timestamp.valueOf("2024-03-10 17:30:00"), movies.get(1), theaters.get(1)));
-//			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-10 18:30:00"), Timestamp.valueOf("2024-03-10 20:30:00"), movies.get(2), theaters.get(2)));
-//			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-10 21:30:00"), Timestamp.valueOf("2024-03-10 23:30:00"), movies.get(3), theaters.get(0)));
-//			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-10 12:30:00"), Timestamp.valueOf("2024-03-10 14:30:00"), movies.get(4), theaters.get(1)));
-//			movieShowRepository.saveAll(movieShows);
-//
-//
-//			for (Theater theater: theaters) {
-//				List<Seat> theaterSeats = new ArrayList<>();
-//				for (int i = 1; i <= 12; i++) {
-//					for (int j = 1; j <= 12; j++) {
-//						Seat seat = new Seat(i, j, "NORMAL", theater);
-//						seatRepository.save(seat);
-//						theaterSeats.add(seat);
-//					}
-//				}
-//				theater.setSeats(theaterSeats);
-//			}
-//			theaterRepository.saveAll(theaters);
-//
-//			final List<BookedSeat> bookedSeats = new ArrayList<>();
-//
-//			final List<Booking> bookings = new ArrayList<>();
+
+
 
 		};
 	}

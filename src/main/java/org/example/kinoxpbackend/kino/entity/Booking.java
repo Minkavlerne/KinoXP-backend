@@ -1,10 +1,10 @@
 package org.example.kinoxpbackend.kino.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.example.kinoxpbackend.security.entity.UserWithRoles;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -18,31 +18,24 @@ import java.util.List;
 public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private int Id;
+    private int id;
 
     @Column(nullable = false, unique = true)
     private String bookingNumber;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User userId;
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     @OneToOne
-    private MovieShow movieShowId;
+    private MovieShow movieShow;
 
-    @OneToMany(mappedBy = "bookingId")
-    @JsonBackReference
-    private List<BookedSeat> bookedSeats;
+    @OneToMany
+    private List<Seat> seat;
 
-    @CreationTimestamp
-    private LocalDateTime created_at;
-    @UpdateTimestamp
-    private LocalDateTime updated_at;
+    @OneToOne(cascade = CascadeType.REMOVE)
+    private UserWithRoles user;
 
-    public Booking(String bookingNumber, User userId, MovieShow movieShowId, List<BookedSeat> bookedSeats) {
-        this.bookingNumber = bookingNumber;
-        this.userId = userId;
-        this.movieShowId = movieShowId;
-        this.bookedSeats = bookedSeats;
-    }
 }

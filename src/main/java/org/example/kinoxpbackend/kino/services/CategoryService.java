@@ -10,47 +10,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
-@Service
+//@Service
 public class CategoryService {
-
-    CategoryRepository categoryRepository;
-
-    public CategoryService(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
-    }
-
-    public List<String> getAllCategories() {
-        List<Category> categories =  categoryRepository.findAll();
-        //Convert from list of Categories to DTO-type, list of Strings
-        return categories.stream().map((c)->new String(c.getName())).toList();
-    }
-
-    public CategoryDto getCategoryById(int id) {
-        Category category = categoryRepository.findById(id).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
-        return new CategoryDto(category, true);
-    }
-
-    public CategoryDto addCategory(CategoryDto request) {
-        Category category = new Category();
-        category.setName(request.getName());
-
-        categoryRepository.save(category);
-        return new CategoryDto(category, false);
-    }
-
-    public CategoryDto editCategory(CategoryDto request, int id) {
-        Category categoryToEdit = categoryRepository.findById(id).orElseThrow(()
-                -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
-        categoryToEdit.setName(request.getName());
-        categoryRepository.save(categoryToEdit);
-        return new CategoryDto(categoryToEdit, false);
-    }
-
-    public ResponseEntity deleteCategory(int id) {
-        Category categoryToDelete = categoryRepository.findById(id).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
-        categoryRepository.delete(categoryToDelete);
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
-    }
 }
