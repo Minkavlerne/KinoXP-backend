@@ -11,22 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RequestMapping("/seats")
-@RestController
+//@RequestMapping("/seats")
+//@RestController
 public class SeatController {
-    SeatService seatService;
-
-    public SeatController(SeatService seatService) {
-        this.seatService = seatService;
-    }
-
-    @GetMapping
-    public List<SeatDto> getAllSeats() {
-        return seatService.getAllSeats();
-    }
-
-@GetMapping(path ="/{id}")
-    public SeatDto getSeatById(@PathVariable int id) {
-        return seatService.getSeatById(id);
-    }
 }

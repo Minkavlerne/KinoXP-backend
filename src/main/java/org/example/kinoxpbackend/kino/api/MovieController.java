@@ -11,33 +11,15 @@ import java.util.List;
 @RequestMapping("/movies")
 @RestController
 public class MovieController {
-    MovieService movieService;
 
-    public MovieController (MovieService movieService) {
+    private final MovieService movieService;
+
+    public MovieController(MovieService movieService) {
         this.movieService = movieService;
     }
 
     @GetMapping
-    public List<MovieDto> getAllMovies() {
-        return movieService.getAllMovies();
-    }
-    @GetMapping(path ="/{id}")
-    public MovieDto getMovieById(@PathVariable int id) {
-        return movieService.getMovieById(id);
-    }
-
-    @PostMapping
-    public MovieDto addMovie(@RequestBody MovieDto request) {
-        return movieService.addMovie(request);
-    }
-
-    @PutMapping(path = "/{id}")
-    public MovieDto editMovie(@RequestBody MovieDto request, @PathVariable int id) {
-        return movieService.editMovie(request, id);
-    }
-
-    @DeleteMapping(path = "/{id}")
-    public ResponseEntity deleteMovie(@PathVariable int id) {
-        return movieService.deleteMovie(id);
+    public ResponseEntity<List<MovieDto>> getAllMovies() {
+        return ResponseEntity.ok(movieService.getAllMovies());
     }
 }

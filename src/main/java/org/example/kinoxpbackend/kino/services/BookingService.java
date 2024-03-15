@@ -11,37 +11,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
-@Service
+//@Service
 public class BookingService {
-
-    BookingRepository bookingRepository;
-
-    MovieShowRepository movieShowRepository;
-
-    public BookingService(BookingRepository bookingRepository) {
-        this.bookingRepository = bookingRepository;
-    }
-
-    public List<Booking> getAllBookings() {
-        return bookingRepository.findAll();
-    }
-
-    public BookingDto getBookingById(int id) {
-        Booking booking = bookingRepository.findById(id).orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Booking not found"));
-        return new BookingDto(booking);
-    }
-
-    public BookingDto addBooking(BookingDto request) {
-        Booking booking = new Booking();
-        booking.setBookingNumber(request.getBookingNumber());
-        // TODO add userId
-
-        MovieShow movieShow = movieShowRepository.findById(request.getMovieShowId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "MovieShow not found"));
-        booking.setMovieShowId(movieShow);
-
-        Booking savedBooking = bookingRepository.save(booking);
-        return new BookingDto(savedBooking);
-    }
 }

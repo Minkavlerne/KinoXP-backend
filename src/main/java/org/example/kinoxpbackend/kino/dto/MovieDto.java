@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @NotNull
 public class MovieDto {
-    private int Id;
+    private int id;
     private String title;
     private String description;
     private String posterBase64;
@@ -25,17 +25,20 @@ public class MovieDto {
     private String trailerUrl;
     private int ageLimit;
     private LocalTime duration;
+    private String releaseDate;
     private List<String> categories;
 
-    public MovieDto(Movie m){
-        this.Id = m.getId();
-        this.title = m.getTitle();
-        this.description = m.getDescription();
-        this.posterBase64 = m.getPosterBase64();
-        this.posterUrl = m.getPosterUrl();
-        this.trailerUrl = m.getTrailerUrl();
-        this.ageLimit = m.getAgeLimit();
-        this.duration = m.getDuration();
-        this.categories = m.getCategories().stream().map(Category::getName).toList();
+    public MovieDto(Movie movie) {
+        this.id = movie.getId();
+        this.title = movie.getTitle();
+        this.description = movie.getDescription();
+        this.posterBase64 = movie.getPosterBase64();
+        this.posterUrl = movie.getPosterUrl();
+        this.trailerUrl = movie.getTrailerUrl();
+        this.ageLimit = movie.getAgeLimit();
+        this.duration = movie.getDuration();
+        this.releaseDate = movie.getReleaseDate().toString();
+        this.categories = movie.getCategories().stream().map(Category::getName).toList();
+
     }
 }

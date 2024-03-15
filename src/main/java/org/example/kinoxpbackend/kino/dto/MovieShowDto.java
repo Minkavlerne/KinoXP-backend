@@ -14,21 +14,8 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @NoArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MovieShowDto {
     private int id;
     private Timestamp startTime;
     private Timestamp endTime;
-    private int movie;
-    private int theater;
-    private Timestamp created_at;
-    private Timestamp updated_at;
-
-    public MovieShowDto(MovieShow movieShow) {
-        this.id = movieShow.getId();
-        this.startTime = movieShow.getStartTime();
-        this.endTime = movieShow.getEndTime();
-        this.movie = movieShow.getMovie().getId();
-        this.theater = movieShow.getTheater().getId();
-    }
 }

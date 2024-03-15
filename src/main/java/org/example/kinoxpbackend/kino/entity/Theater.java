@@ -1,6 +1,5 @@
 package org.example.kinoxpbackend.kino.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,31 +19,17 @@ public class Theater {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int id;
+
     @Column(nullable = false)
     private String name;
+
     @CreationTimestamp
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
+
     @UpdateTimestamp
-    private LocalDateTime updated_at;
+    private LocalDateTime updatedAt;
 
-    // Relations
-    @OneToMany(mappedBy = "theater")
-    @JsonBackReference
-    private List<MovieShow> movieShows;
+    @OneToMany
+    private List<Seat> seats = new ArrayList<>();
 
-    @OneToMany(mappedBy = "theater")
-    @JsonBackReference
-    private List<Seat> seats;
-
-    @OneToMany(mappedBy = "theaterId")
-    @JsonBackReference
-    private List<BookedSeat> bookedSeats;
-
-
-    public Theater(String name) {
-        this.name = name;
-        this.movieShows = new ArrayList<>();
-        this.seats = new ArrayList<>();
-        this.bookedSeats = new ArrayList<>();
-    }
 }
