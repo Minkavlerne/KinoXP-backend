@@ -20,6 +20,9 @@ public class BookedSeat {
     @Id
     private int Id;
 
+    @CreationTimestamp
+    public LocalDateTime created_at;
+
     @ManyToOne
     @JoinColumn(name = "seat_id")
     @JsonManagedReference
@@ -35,8 +38,6 @@ public class BookedSeat {
     @JoinColumn (name = "theater_id")
     private Theater theaterId;
 
-    @CreationTimestamp
-    public LocalDateTime created_at;
 
     public BookedSeat(Seat seat, Theater theaterId) {
         this.seat = seat;

@@ -25,7 +25,7 @@ public class MovieDto {
     private String trailerUrl;
     private int ageLimit;
     private LocalTime duration;
-    private List<Integer> categoryIds;
+    private List<String> categories;
 
     public MovieDto(Movie m){
         this.Id = m.getId();
@@ -36,6 +36,6 @@ public class MovieDto {
         this.trailerUrl = m.getTrailerUrl();
         this.ageLimit = m.getAgeLimit();
         this.duration = m.getDuration();
-        this.categoryIds = m.getCategories().stream().map(Category::getId).toList();
+        this.categories = m.getCategories().stream().map(Category::getName).toList();
     }
 }

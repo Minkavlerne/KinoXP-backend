@@ -20,10 +20,14 @@ public class Theater {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int id;
-
     @Column(nullable = false)
     private String name;
+    @CreationTimestamp
+    private LocalDateTime created_at;
+    @UpdateTimestamp
+    private LocalDateTime updated_at;
 
+    // Relations
     @OneToMany(mappedBy = "theater")
     @JsonBackReference
     private List<MovieShow> movieShows;
@@ -36,10 +40,6 @@ public class Theater {
     @JsonBackReference
     private List<BookedSeat> bookedSeats;
 
-    @CreationTimestamp
-    private LocalDateTime created_at;
-    @UpdateTimestamp
-    private LocalDateTime updated_at;
 
     public Theater(String name) {
         this.name = name;

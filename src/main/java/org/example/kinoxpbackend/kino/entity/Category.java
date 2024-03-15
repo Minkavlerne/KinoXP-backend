@@ -1,5 +1,6 @@
 package org.example.kinoxpbackend.kino.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -17,29 +18,23 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 public class Category {
-    @jakarta.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    private int Id;
+    private int id;
     @Column(nullable = false, unique = true)
     private String name;
-
-    @ManyToMany
-    @JsonManagedReference
-    @JoinTable(
-        name = "movie_category",
-        joinColumns = @JoinColumn(name = "category_id"),
-        inverseJoinColumns = @JoinColumn(name = "movie_id")
-    )
-    private List<Movie> movies;
-
     @CreationTimestamp
     private LocalDateTime created_at;
     @UpdateTimestamp
     private LocalDateTime updated_at;
 
+    // Relations
+    @ManyToMany(mappedBy = "categories")
+    @JsonBackReference
+    private List<Movie> movies = new ArrayList<>();
+
+
     public Category(String name) {
         this.name = name;
-        this.movies = new ArrayList<>();
     }
 }

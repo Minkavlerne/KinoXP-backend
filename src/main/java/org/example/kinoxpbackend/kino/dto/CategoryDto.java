@@ -28,7 +28,6 @@ public class CategoryDto {
         this.created_at = c.getCreated_at();
         this.updated_at = c.getUpdated_at();
         if (includeMovies) {
-            this.movieIds = c.getMovies().stream().map(Movie::getId).collect(Collectors.toList());
         }
     }
 }

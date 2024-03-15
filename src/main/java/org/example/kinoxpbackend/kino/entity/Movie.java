@@ -20,42 +20,44 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 public class Movie {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
-
     @Column(nullable = false, unique = true)
     private String title;
     @Column(nullable = false)
     private String description;
-
     @Column(nullable = false)
     private String posterBase64;
     @Column(nullable = false)
     private String posterUrl;
     @Column(nullable = false)
     private String trailerUrl;
-
     @Column(nullable = false)
     private int ageLimit;
-
     @Column(nullable = false)
     private LocalTime duration;
+    @CreationTimestamp
+    private LocalDateTime created_at;
+    @UpdateTimestamp
+    private LocalDateTime updated_at;
 
-    @ManyToMany(mappedBy = "movies")
-    @JsonBackReference
-    private List<Category> categories;
+    // Relations
+
+    @ManyToMany(cascade = {CascadeType.MERGE})
+    @JoinTable(
+            name = "movie_category",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    @JsonManagedReference
+    private List<Category> categories = new ArrayList<>();
+
 
     @OneToMany(mappedBy = "movie")
     @JsonBackReference
-    private List<MovieShow> movieShows;
+    private List<MovieShow> movieShows = new ArrayList<>();
 
-    @CreationTimestamp
-    private LocalDateTime created_at;
-
-    @UpdateTimestamp
-    private LocalDateTime updated_at;
 
     public Movie(String title, String description, String posterBase64, String posterUrl, String trailerUrl, int ageLimit, LocalTime duration) {
         this.title = title;
@@ -65,6 +67,5 @@ public class Movie {
         this.trailerUrl = trailerUrl;
         this.ageLimit = ageLimit;
         this.duration = duration;
-        this.categories = new ArrayList<>();
     }
 }
