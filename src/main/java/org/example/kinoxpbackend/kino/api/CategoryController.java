@@ -8,7 +8,21 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-//@RequestMapping("/categories")
-//@RestController
+@RequestMapping("/categories")
+@RestController
 public class CategoryController {
+    private final CategoryService categoryService;
+
+    public CategoryController(CategoryService categoryService){
+        this.categoryService = categoryService;
+    }
+    @GetMapping
+    public ResponseEntity<List<CategoryDto>> getAllCategories(){
+        return ResponseEntity.ok(categoryService.getAllCategories());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CategoryDto> getCategoryById(@PathVariable int id){
+        return ResponseEntity.ok(categoryService.getCategoryById(id));
+    }
 }
