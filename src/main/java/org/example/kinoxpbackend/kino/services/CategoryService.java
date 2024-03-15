@@ -10,6 +10,19 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
-//@Service
+@Service
 public class CategoryService {
+    private final CategoryRepository categoryRepository;
+
+    public CategoryService(CategoryRepository categoryRepository){
+        this.categoryRepository = categoryRepository;
+    }
+    public List<CategoryDto> getAllCategories(){
+        List<Category> categories = categoryRepository.findAll();
+        return categories.stream().map(CategoryDto::new).toList();
+    }
+    public CategoryDto getCategoryById(int id){
+        Category category = categoryRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
+        return new CategoryDto(category);
+    }
 }
