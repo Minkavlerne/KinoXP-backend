@@ -1,9 +1,6 @@
 package org.example.kinoxpbackend.kino.services;
 
-import org.aspectj.weaver.ast.Var;
-import org.example.kinoxpbackend.kino.dto.MovieDto;
 import org.example.kinoxpbackend.kino.dto.MovieShowDto;
-import org.example.kinoxpbackend.kino.entity.Movie;
 import org.example.kinoxpbackend.kino.entity.MovieShow;
 import org.example.kinoxpbackend.kino.repository.MovieRepository;
 import org.example.kinoxpbackend.kino.repository.MovieShowRepository;
@@ -13,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MovieShowService {
