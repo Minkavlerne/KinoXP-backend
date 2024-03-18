@@ -27,6 +27,10 @@ public class MovieShowController {
     public ResponseEntity<MovieShowDto> getMovieShowById(@PathVariable int id) {
         return ResponseEntity.ok(movieShowService.getMovieShowById(id));
     }
+   @PutMapping("/{id}")
+    public ResponseEntity<MovieShowDto> updateMovieShow(@PathVariable int id, @RequestBody MovieShowDto movieShowDto) {
+        return ResponseEntity.ok(movieShowService.updateMovieShow(id, movieShowDto));
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMovieShow(@PathVariable int id) {
