@@ -33,7 +33,7 @@ public class TheaterService {
         return new TheaterDto(theater);
     }
   
-    public TheaterDto createTheater(TheaterDto theaterDto)
+    public TheaterDto createTheater(TheaterDto theaterDto){
         Theater theater = new Theater();
         theater.setName(theaterDto.getName());
         theaterRepository.save(theater);
