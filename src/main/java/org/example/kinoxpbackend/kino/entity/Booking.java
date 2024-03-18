@@ -9,7 +9,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -21,7 +23,7 @@ public class Booking {
     private int id;
 
     @Column(nullable = false, unique = true)
-    private String bookingNumber;
+    private String bookingNumber = UUID.randomUUID().toString().replace("-", "").substring(0, 8);
 
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -29,13 +31,23 @@ public class Booking {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @OneToOne
+    @ManyToOne
     private MovieShow movieShow;
 
-    @OneToMany
-    private List<Seat> seat;
+    @ManyToMany
+    @JoinTable(
+            name = "booking_seats",
+            joinColumns = @JoinColumn(name = "booking_id"),
+            inverseJoinColumns = @JoinColumn(name = "seat_id")
+    )
+    private List<Seat> seats = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     private UserWithRoles user;
+
+    public Booking(MovieShow movieShow, UserWithRoles user) {
+        this.movieShow = movieShow;
+        this.user = user;
+    }
 
 }

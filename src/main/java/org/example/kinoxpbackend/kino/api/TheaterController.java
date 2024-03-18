@@ -28,4 +28,19 @@ public class TheaterController {
     public ResponseEntity<TheaterDto> getTheaterById(@PathVariable int id) {
         return ResponseEntity.ok(theaterService.getTheaterById(id));
     }
+
+    @PostMapping
+    public ResponseEntity<TheaterDto> createTheater(@RequestBody TheaterDto theaterDto){
+        return ResponseEntity.ok(theaterService.createTheater(theaterDto));
+
+  }
+    @PutMapping("/{id}")
+    public ResponseEntity<TheaterDto> updateTheater(@PathVariable int id, @RequestBody TheaterDto theaterDto){
+        return ResponseEntity.ok(theaterService.updateTheater(id, theaterDto));
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<TheaterDto> deleteTheaterById(@PathVariable int id) {
+        return ResponseEntity.ok(theaterService.deleteTheaterById(id));
+
+    }
 }
