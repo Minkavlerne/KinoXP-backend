@@ -1,14 +1,11 @@
 package org.example.kinoxpbackend.kino.services;
 
-import jakarta.persistence.EntityManager;
-import jakarta.transaction.Transactional;
 import org.example.kinoxpbackend.kino.dto.MovieDto;
 import org.example.kinoxpbackend.kino.entity.Category;
 import org.example.kinoxpbackend.kino.entity.Movie;
 import org.example.kinoxpbackend.kino.repository.CategoryRepository;
 import org.example.kinoxpbackend.kino.repository.MovieRepository;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -44,6 +41,24 @@ public class MovieService {
         return new MovieDto(movie);
     }
 
+    public MovieDto editMovie(MovieDto request, int id) {
+        try {
+            if (request.getId() != id) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You cannot change the id of an existing movie");
+            }
+        Movie movieToEdit = movieRepository.findById(id).orElseThrow(()
+                -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie not found"));
+        System.out.println(request.toString());
+        updateMovie(movieToEdit, request);
+        System.out.println(movieToEdit);
+        movieRepository.save(movieToEdit);
+        return new MovieDto(movieToEdit);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
     private void updateMovie(Movie movie, MovieDto movieDto) {
         movie.setTitle(movieDto.getTitle());
         movie.setDescription(movieDto.getDescription());
@@ -56,4 +71,5 @@ public class MovieService {
         List<Category> categories = movieDto.getCategories().stream().map(categoryName -> categoryRepository.findByName(categoryName).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"))).toList();
         movie.setCategories(categories);
     }
+
 }

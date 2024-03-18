@@ -42,4 +42,6 @@ public class MovieDto {
         this.categories = movie.getCategories().stream().map(Category::getName).toList();
 
     }
+
+
 }
