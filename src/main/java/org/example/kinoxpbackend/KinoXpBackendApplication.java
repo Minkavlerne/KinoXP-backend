@@ -99,7 +99,7 @@ public class KinoXpBackendApplication {
 
 				List<Seat> allSeats = movieShow.getTheater().getSeats();
 
-				int numberOfSeatsToBook = random.nextInt(allSeats.size()) + 1;
+				int numberOfSeatsToBook = random.nextInt(4) + 1;
 
 				List<Seat> seatsToBook = IntStream.range(0, numberOfSeatsToBook).mapToObj(allSeats::get).toList();
 
@@ -107,9 +107,8 @@ public class KinoXpBackendApplication {
 				booking.setSeats(seatsToBook);
 
 				bookings.add(booking);
-
 			}
-			//bookingRepository.saveAll(bookings);
+			bookingRepository.saveAll(bookings);
 		};
 	}
 }
