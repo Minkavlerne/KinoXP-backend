@@ -37,4 +37,8 @@ public class CategoryService {
         categoryRepository.save(category);
         return new CategoryDto(category);
     }
+    public void deleteCategory(int id){
+        Category category = categoryRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
+        categoryRepository.delete(category);
+    }
 }
