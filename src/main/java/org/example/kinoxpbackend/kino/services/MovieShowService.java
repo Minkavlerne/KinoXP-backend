@@ -16,22 +16,27 @@ import java.util.List;
 
 @Service
 public class MovieShowService {
-private final MovieShowRepository movieShowRepository;
-private final MovieRepository movieRepository;
-private final TheaterRepository theaterRepository;
+        private final MovieShowRepository movieShowRepository;
+        private final MovieRepository movieRepository;
+        private final TheaterRepository theaterRepository;
 
-public MovieShowService(MovieShowRepository movieShowRepository, MovieRepository movieRepository, TheaterRepository theaterRepository){
-        this.movieShowRepository = movieShowRepository;
-        this.movieRepository = movieRepository;
-        this.theaterRepository = theaterRepository;
+        public MovieShowService(MovieShowRepository movieShowRepository, MovieRepository movieRepository, TheaterRepository theaterRepository){
+                this.movieShowRepository = movieShowRepository;
+                this.movieRepository = movieRepository;
+                this.theaterRepository = theaterRepository;
         }
-public List<MovieShowDto> getAllMovieShows(){
-        List<MovieShow> movieShows = movieShowRepository.findAll();
-        return movieShows.stream().map(MovieShowDto::new).toList();
-        }
-public MovieShowDto getMovieShowById(int id){
-        MovieShow movieShow = movieShowRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie show not found"));
-        return new MovieShowDto(movieShow);
-        }
+        public List<MovieShowDto> getAllMovieShows(){
+                List<MovieShow> movieShows = movieShowRepository.findAll();
+                return movieShows.stream().map(MovieShowDto::new).toList();
+                }
+        public MovieShowDto getMovieShowById(int id){
+                MovieShow movieShow = movieShowRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie show not found"));
+                return new MovieShowDto(movieShow);
+                }
+
+        public void deleteMovieShow(int id){
+                MovieShow movieShow = movieShowRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie show not found"));
+                movieShowRepository.delete(movieShow);
+                }
 }
 

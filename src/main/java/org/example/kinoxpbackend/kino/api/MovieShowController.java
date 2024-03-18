@@ -27,4 +27,10 @@ public class MovieShowController {
     public ResponseEntity<MovieShowDto> getMovieShowById(@PathVariable int id) {
         return ResponseEntity.ok(movieShowService.getMovieShowById(id));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteMovieShow(@PathVariable int id) {
+        movieShowService.deleteMovieShow(id);
+        return ResponseEntity.noContent().build();
+    }
 }
