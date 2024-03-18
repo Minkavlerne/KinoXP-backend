@@ -18,4 +18,5 @@ public class TheaterDto {
         this.id = theater.getId();
         this.name = theater.getName();
     }
+
 }
