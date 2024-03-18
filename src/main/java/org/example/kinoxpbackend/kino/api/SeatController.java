@@ -31,6 +31,10 @@ public class SeatController {
     public ResponseEntity<SeatDto> createSeat(@RequestBody SeatDto seatDto){
         return ResponseEntity.ok(seatService.createSeat(seatDto));
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<SeatDto> updateSeat(@PathVariable int id, @RequestBody SeatDto seatDto){
+        return ResponseEntity.ok(seatService.updateSeat(id, seatDto));
+    }
 
 
 }
