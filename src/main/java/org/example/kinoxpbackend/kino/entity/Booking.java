@@ -23,7 +23,7 @@ public class Booking {
     private int id;
 
     @Column(nullable = false, unique = true)
-    private String bookingNumber = UUID.randomUUID().toString();
+    private String bookingNumber = UUID.randomUUID().toString().replace("-", "").substring(0, 8);
 
     @CreationTimestamp
     private LocalDateTime createdAt;
