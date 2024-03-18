@@ -1,5 +1,6 @@
 package org.example.kinoxpbackend.kino.services;
 
+import org.example.kinoxpbackend.kino.dto.MovieDto;
 import org.example.kinoxpbackend.kino.dto.MovieShowDto;
 import org.example.kinoxpbackend.kino.entity.Movie;
 import org.example.kinoxpbackend.kino.entity.MovieShow;
@@ -28,15 +29,30 @@ public class MovieShowService {
         public List<MovieShowDto> getAllMovieShows(){
                 List<MovieShow> movieShows = movieShowRepository.findAll();
                 return movieShows.stream().map(MovieShowDto::new).toList();
-                }
+        }
         public MovieShowDto getMovieShowById(int id){
                 MovieShow movieShow = movieShowRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie show not found"));
                 return new MovieShowDto(movieShow);
-                }
+        }
+
+        public MovieShowDto addMovieShow(MovieShowDto movieShowDto){
+                MovieShow movieShow = new MovieShow();
+                convertToMovieShow(movieShow, movieShowDto);
+                movieShowRepository.save(movieShow);
+                return new MovieShowDto(movieShow);
+
+        }
 
         public void deleteMovieShow(int id){
                 MovieShow movieShow = movieShowRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie show not found"));
                 movieShowRepository.delete(movieShow);
-                }
+        }
+
+        private void convertToMovieShow(MovieShow movieShow, MovieShowDto movieShowDto){
+                movieShow.setMovie(movieRepository.findById(movieShowDto.getMovieId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie not found")));
+                movieShow.setTheater(theaterRepository.findById(movieShowDto.getTheaterId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Theater not found")));
+                movieShow.setStartTime(movieShowDto.getStartTime());
+                movieShow.setEndTime(movieShowDto.getEndTime());
+        }
 }
 
