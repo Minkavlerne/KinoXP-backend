@@ -28,4 +28,17 @@ public class SeatService {
         Seat seat = seatRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Seat not found"));
         return new SeatDto(seat);
     }
+    public SeatDto createSeat(SeatDto seatDto){
+        Seat seat = new Seat(seatDto.getSeatRow(), seatDto.getSeatNumber(), seatDto.getType());
+        seatRepository.save(seat);
+        return new SeatDto(seat);
+    }
+    public SeatDto updateSeat(int id, SeatDto seatDto){
+        Seat seat = seatRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Seat not found"));
+        seat.setSeatRow(seatDto.getSeatRow());
+        seat.setSeatNumber(seatDto.getSeatNumber());
+        seat.setType(seatDto.getType());
+        seatRepository.save(seat);
+        return new SeatDto(seat);
+    }
 }

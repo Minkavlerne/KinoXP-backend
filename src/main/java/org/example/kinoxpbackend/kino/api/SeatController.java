@@ -7,10 +7,7 @@ import org.example.kinoxpbackend.kino.repository.SeatRepository;
 import org.example.kinoxpbackend.kino.services.CategoryService;
 import org.example.kinoxpbackend.kino.services.SeatService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,6 +26,14 @@ public class SeatController {
     @GetMapping("/{id}")
     public ResponseEntity<SeatDto> getSeatById(@PathVariable int id){
         return ResponseEntity.ok(seatService.getSeatById(id));
+    }
+    @PostMapping
+    public ResponseEntity<SeatDto> createSeat(@RequestBody SeatDto seatDto){
+        return ResponseEntity.ok(seatService.createSeat(seatDto));
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<SeatDto> updateSeat(@PathVariable int id, @RequestBody SeatDto seatDto){
+        return ResponseEntity.ok(seatService.updateSeat(id, seatDto));
     }
 
 

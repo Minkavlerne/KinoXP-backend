@@ -15,9 +15,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @SpringBootApplication
 public class KinoXpBackendApplication {
@@ -83,6 +83,33 @@ public class KinoXpBackendApplication {
 				theaterRepository.save(theater);
 			}
 
+			List<MovieShow> movieShows = new ArrayList<>();
+			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-18 12:00:00"), Timestamp.valueOf("2024-03-18 12:00:00"), movies.get(0), theaters.get(0)));
+			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-18 12:00:00"), Timestamp.valueOf("2024-03-18 12:00:00"), movies.get(1), theaters.get(1)));
+			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-18 12:00:00"), Timestamp.valueOf("2024-03-18 12:00:00"), movies.get(2), theaters.get(2)));
+			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-18 12:00:00"), Timestamp.valueOf("2024-03-18 12:00:00"), movies.get(3), theaters.get(0)));
+			movieShowRepository.saveAll(movieShows);
+
+			List<Booking> bookings = new ArrayList<>();
+
+
+			Random random = new Random();
+
+			for (MovieShow movieShow: movieShows) {
+
+				List<Seat> allSeats = movieShow.getTheater().getSeats();
+
+				int numberOfSeatsToBook = random.nextInt(allSeats.size()) + 1;
+
+				List<Seat> seatsToBook = IntStream.range(0, numberOfSeatsToBook).mapToObj(allSeats::get).toList();
+
+				Booking booking = new Booking(movieShow, user1);
+				booking.setSeats(seatsToBook);
+
+				bookings.add(booking);
+
+			}
+			//bookingRepository.saveAll(bookings);
 		};
 	}
 }

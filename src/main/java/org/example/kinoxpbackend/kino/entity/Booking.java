@@ -9,7 +9,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -29,13 +31,23 @@ public class Booking {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @OneToOne
+    @ManyToOne
     private MovieShow movieShow;
 
     @OneToMany
-    private List<Seat> seat;
+    private List<Seat> seats = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     private UserWithRoles user;
+
+    @PrePersist
+    public void generateBookingNumber() {
+        this.bookingNumber = "BookingNumber: " + UUID.randomUUID();
+    }
+
+    public Booking(MovieShow movieShow, UserWithRoles user) {
+        this.movieShow = movieShow;
+        this.user = user;
+    }
 
 }
