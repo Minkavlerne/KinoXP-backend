@@ -25,4 +25,10 @@ public class CategoryService {
         Category category = categoryRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found"));
         return new CategoryDto(category);
     }
+    public CategoryDto createCategory(CategoryDto categoryDto){
+        Category category = new Category();
+        category.setName(categoryDto.getName());
+        categoryRepository.save(category);
+        return new CategoryDto(category);
+    }
 }
