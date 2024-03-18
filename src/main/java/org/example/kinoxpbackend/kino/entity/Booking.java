@@ -23,7 +23,7 @@ public class Booking {
     private int id;
 
     @Column(nullable = false, unique = true)
-    private String bookingNumber;
+    private String bookingNumber = UUID.randomUUID().toString();
 
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -34,16 +34,16 @@ public class Booking {
     @ManyToOne
     private MovieShow movieShow;
 
-    @OneToMany
+    @ManyToMany
+    @JoinTable(
+            name = "booking_seats",
+            joinColumns = @JoinColumn(name = "booking_id"),
+            inverseJoinColumns = @JoinColumn(name = "seat_id")
+    )
     private List<Seat> seats = new ArrayList<>();
 
     @ManyToOne
     private UserWithRoles user;
-
-    @PrePersist
-    public void generateBookingNumber() {
-        this.bookingNumber = "BookingNumber: " + UUID.randomUUID();
-    }
 
     public Booking(MovieShow movieShow, UserWithRoles user) {
         this.movieShow = movieShow;
