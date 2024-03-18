@@ -28,6 +28,11 @@ public class MovieShowController {
         return ResponseEntity.ok(movieShowService.getMovieShowById(id));
     }
 
+    @PostMapping
+    public ResponseEntity<MovieShowDto> addMovieShow(@RequestBody MovieShowDto movieShowDto) {
+        return ResponseEntity.ok(movieShowService.addMovieShow(movieShowDto));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMovieShow(@PathVariable int id) {
         movieShowService.deleteMovieShow(id);
