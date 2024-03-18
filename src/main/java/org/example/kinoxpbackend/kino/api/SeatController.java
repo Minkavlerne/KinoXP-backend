@@ -35,6 +35,11 @@ public class SeatController {
     public ResponseEntity<SeatDto> updateSeat(@PathVariable int id, @RequestBody SeatDto seatDto){
         return ResponseEntity.ok(seatService.updateSeat(id, seatDto));
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteSeat(@PathVariable int id){
+        seatService.deleteSeat(id);
+        return ResponseEntity.noContent().build();
+    }
 
 
 }

@@ -41,4 +41,7 @@ public class SeatService {
         seatRepository.save(seat);
         return new SeatDto(seat);
     }
+    public void deleteSeat(int id){
+        seatRepository.deleteById(id);
+    }
 }

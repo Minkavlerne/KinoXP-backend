@@ -32,6 +32,8 @@ public class TheaterService {
         Theater theater = theaterRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Theater not found"));
         return new TheaterDto(theater);
     }
+
+  
     public TheaterDto updateTheater(int id, TheaterDto theaterDto){
         Theater theater = theaterRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Theater not found"));
         theater.setName(theaterDto.getName());
