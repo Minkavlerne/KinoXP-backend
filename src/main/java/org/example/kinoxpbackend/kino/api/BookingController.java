@@ -7,8 +7,24 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//@RequestMapping("/bookings")
-//@RestController
+@RequestMapping("/bookings")
+@RestController
 public class BookingController {
 
+    private final BookingService bookingService;
+
+
+    public BookingController(BookingService bookingService) {
+        this.bookingService = bookingService;
+    }
+
+    @GetMapping
+    public List<BookingDto> getAllBookings() {
+        return bookingService.getAllBookings();
+    }
+
+    @GetMapping("/{id}")
+    public BookingDto getBookingById(@PathVariable int id) {
+        return bookingService.getBookingById(id);
+    }
 }
