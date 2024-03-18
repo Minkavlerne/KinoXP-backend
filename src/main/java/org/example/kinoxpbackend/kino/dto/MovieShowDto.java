@@ -16,6 +16,18 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class MovieShowDto {
     private int id;
+    private int movieId;
     private Timestamp startTime;
     private Timestamp endTime;
+    private int theaterId;
+
+    public MovieShowDto(MovieShow movieShow) {
+        this.id = movieShow.getId();
+        this.movieId = movieShow.getMovie().getId();
+        this.startTime = movieShow.getStartTime();
+        this.endTime = movieShow.getEndTime();
+        this.theaterId = movieShow.getTheater().getId();
+    }
 }
+
+

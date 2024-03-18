@@ -9,7 +9,22 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//@RequestMapping("/movieshows")
-//@RestController
+@RequestMapping("/movieshows")
+@RestController
 public class MovieShowController {
+    private final MovieShowService movieShowService;
+
+    public MovieShowController(MovieShowService movieShowService) {
+        this.movieShowService = movieShowService;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<MovieShowDto>> getAllMovieShows() {
+        return ResponseEntity.ok(movieShowService.getAllMovieShows());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<MovieShowDto> getMovieShowById(@PathVariable int id) {
+        return ResponseEntity.ok(movieShowService.getMovieShowById(id));
+    }
 }
