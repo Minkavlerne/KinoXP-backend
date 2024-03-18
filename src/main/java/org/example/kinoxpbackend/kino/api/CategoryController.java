@@ -25,4 +25,8 @@ public class CategoryController {
     public ResponseEntity<CategoryDto> getCategoryById(@PathVariable int id){
         return ResponseEntity.ok(categoryService.getCategoryById(id));
     }
+    @PostMapping
+    public ResponseEntity<CategoryDto> createCategory(@RequestBody CategoryDto categoryDto){
+        return ResponseEntity.ok(categoryService.createCategory(categoryDto));
+    }
 }
