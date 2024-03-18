@@ -44,6 +44,11 @@ public class MovieService {
         return new MovieDto(movie);
     }
 
+    public void deleteMovie(int id) {
+        Movie movie = movieRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie not found"));
+        movieRepository.delete(movie);
+    }
+
     private void updateMovie(Movie movie, MovieDto movieDto) {
         movie.setTitle(movieDto.getTitle());
         movie.setDescription(movieDto.getDescription());
