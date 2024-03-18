@@ -32,4 +32,8 @@ public class Theater {
     @OneToMany
     private List<Seat> seats = new ArrayList<>();
 
+    public Theater(String name) {
+        this.name = name;
+    }
+
 }
