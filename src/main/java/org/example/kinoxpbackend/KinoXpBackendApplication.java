@@ -65,8 +65,23 @@ public class KinoXpBackendApplication {
 				movieRepository.save(movie);
 			}
 
+			List<Theater> theaters = new ArrayList<>();
+			theaters.add(new Theater("Winter is coming"));
+			theaters.add(new Theater("Fools spring"));
+			theaters.add(new Theater("Summer"));
+			theaterRepository.saveAll(theaters);
 
-
+			for (Theater theater: theaters) {
+				List<Seat> seats = new ArrayList<>();
+				for (int seatRow = 0; seatRow < 10; seatRow++) {
+					for (int seatNumber = 0; seatNumber < 10; seatNumber++) {
+						seats.add(new Seat(seatRow, seatNumber, "NORMAL"));
+					}
+				}
+				seatRepository.saveAll(seats);
+				theater.setSeats(seats);
+				theaterRepository.save(theater);
+			}
 
 		};
 	}

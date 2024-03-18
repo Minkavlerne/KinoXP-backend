@@ -30,4 +30,10 @@ public class Seat {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    public Seat(int seatRow, int seatNumber, String type) {
+        this.seatRow = seatRow;
+        this.seatNumber = seatNumber;
+        this.type = type;
+    }
+
 }
