@@ -3,6 +3,7 @@ package org.example.kinoxpbackend.kino.api;
 import org.example.kinoxpbackend.kino.dto.BookingDto;
 import org.example.kinoxpbackend.kino.entity.Booking;
 import org.example.kinoxpbackend.kino.services.BookingService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,8 +35,9 @@ public class BookingController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteBooking(@PathVariable int id) {
+    public ResponseEntity<Void> deleteBooking(@PathVariable int id) {
         bookingService.deleteBooking(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
