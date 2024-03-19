@@ -11,6 +11,7 @@ import org.example.kinoxpbackend.kino.entity.Movie;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -27,7 +28,7 @@ public class MovieDto {
     private int ageLimit;
     private LocalTime duration;
     private LocalDate releaseDate;
-    private List<String> categories;
+    private List<String> categories = new ArrayList<>();
 
     public MovieDto(Movie movie) {
         this.id = movie.getId();
