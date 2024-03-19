@@ -1,6 +1,7 @@
 package org.example.kinoxpbackend.kino.api;
 
 import org.example.kinoxpbackend.kino.dto.MovieDto;
+import org.example.kinoxpbackend.kino.entity.Movie;
 import org.example.kinoxpbackend.kino.services.MovieService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +31,11 @@ public class MovieController {
     @PostMapping
     public ResponseEntity<MovieDto> addMovie(@RequestBody MovieDto movieDto) {
         return ResponseEntity.ok(movieService.addMovie(movieDto));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<MovieDto> editMovie(@PathVariable int id, @RequestBody MovieDto request) {
+        return ResponseEntity.ok(movieService.editMovie(request, id));
     }
 
     @DeleteMapping("/{id}")
