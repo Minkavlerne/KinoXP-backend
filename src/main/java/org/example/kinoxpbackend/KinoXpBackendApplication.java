@@ -55,10 +55,10 @@ public class KinoXpBackendApplication {
 
 
 			List<Movie> movies = new ArrayList<>();
-			movies.add(new Movie("The Matrix", "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.", "posterbase64", "posterUrl", "trailerUrl", 16, LocalTime.of(2, 16, 10, 0), LocalDate.of(1999, 5, 7)));
-			movies.add(new Movie("The Shawshank Redemption", "Two imprisoned men bond over a number of years", "posterbase64", "posterUrl", "trailerUrl", 16, LocalTime.of(2, 22, 10, 0), LocalDate.of(1995, 4, 28)));
-			movies.add(new Movie("The Godfather", "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.", "posterbase64", "posterUrl", "trailerUrl", 16, LocalTime.of(2, 55, 10, 0), LocalDate.of(1972, 3, 24)));
-			movies.add(new Movie("The Dark Knight", "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.", "posterbase64", "posterUrl", "trailerUrl", 16, LocalTime.of(2, 32, 10, 0), LocalDate.of(2008, 7, 18)));
+			movies.add(new Movie("The Matrix", "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.", "posterbase64", "https://m.media-amazon.com/images/I/71PfZFFz9yL._AC_UF894,1000_QL80_.jpg", "trailerUrl", 16, LocalTime.of(2, 16, 10, 0), LocalDate.of(1999, 5, 7)));
+			movies.add(new Movie("The Shawshank Redemption", "Two imprisoned men bond over a number of years", "posterbase64", "https://m.media-amazon.com/images/I/71715eBi1sL._AC_UF894,1000_QL80_.jpg", "trailerUrl", 16, LocalTime.of(2, 22, 10, 0), LocalDate.of(1995, 4, 28)));
+			movies.add(new Movie("The Godfather", "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.", "posterbase64", "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg", "trailerUrl", 16, LocalTime.of(2, 55, 10, 0), LocalDate.of(1972, 3, 24)));
+			movies.add(new Movie("The Dark Knight", "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.", "posterbase64", "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_.jpg", "trailerUrl", 16, LocalTime.of(2, 32, 10, 0), LocalDate.of(2008, 7, 18)));
 			movies.add(new Movie("TEST", "TEST TEST TEST", "posterbase64", "posterUrl", "trailerUrl", 16, LocalTime.of(2, 32, 10, 0), LocalDate.of(2024, 7, 18)));
 
 			for (Movie movie: movies) {
