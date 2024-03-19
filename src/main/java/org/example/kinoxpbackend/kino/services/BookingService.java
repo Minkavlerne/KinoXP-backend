@@ -6,7 +6,10 @@ import org.example.kinoxpbackend.kino.entity.Seat;
 import org.example.kinoxpbackend.kino.repository.BookingRepository;
 import org.example.kinoxpbackend.kino.repository.MovieShowRepository;
 import org.example.kinoxpbackend.kino.repository.SeatRepository;
+import org.example.kinoxpbackend.security.repository.UserWithRolesRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,10 +24,14 @@ public class BookingService {
 
     SeatRepository seatRepository;
 
+    UserWithRolesRepository userRepository;
 
-    public BookingService(BookingRepository bookingRepository, MovieShowRepository movieShowRepository) {
+
+    public BookingService(BookingRepository bookingRepository, MovieShowRepository movieShowRepository, SeatRepository seatRepository, UserWithRolesRepository userRepository) {
         this.bookingRepository = bookingRepository;
         this.movieShowRepository = movieShowRepository;
+        this.seatRepository = seatRepository;
+        this.userRepository = userRepository;
     }
 
     public List<BookingDto> getAllBookings() {
@@ -39,9 +46,20 @@ public class BookingService {
 
     public BookingDto addBooking(BookingDto bookingDto) {
         Booking booking = new Booking();
-        booking.setBookingNumber(bookingDto.getBookingNumber());
+        convertToBooking(bookingDto, booking);
         bookingRepository.save(booking);
         return new BookingDto(booking);
+    }
+
+    private void convertToBooking(BookingDto request, Booking booking) {
+        booking.setMovieShow(movieShowRepository.findById(request.getMovieShowId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Movie show not found")));
+        booking.setUser(userRepository.findByUsername(request.getUserName()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found")));
+        List<Seat> seats = new ArrayList<>();
+        for (int seatId : request.getSeatIds()) {
+            Seat seat = seatRepository.findById(seatId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Seat not found"));
+            seats.add(seat);
+        }
+        booking.setSeats(seats);
     }
 
 }
