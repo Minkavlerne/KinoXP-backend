@@ -51,6 +51,15 @@ public class BookingService {
         return new BookingDto(booking);
     }
 
+    public void deleteBooking(int id) {
+        Optional<Booking> booking = bookingRepository.findById(id);
+        if (booking.isPresent()) {
+            bookingRepository.deleteById(id);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Booking not found");
+        }
+    }
+
     private void convertToBooking(BookingDto request, Booking booking) {
         booking.setMovieShow(movieShowRepository.findById(request.getMovieShowId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Movie show not found")));
         booking.setUser(userRepository.findByUsername(request.getUserName()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found")));
