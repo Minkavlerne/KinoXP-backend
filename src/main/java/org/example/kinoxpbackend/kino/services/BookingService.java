@@ -51,11 +51,10 @@ public class BookingService {
         return new BookingDto(booking);
     }
 
-    public BookingDto deleteBooking(int id) {
+    public void deleteBooking(int id) {
         Optional<Booking> booking = bookingRepository.findById(id);
         if (booking.isPresent()) {
             bookingRepository.deleteById(id);
-            return new BookingDto(booking.get());
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Booking not found");
         }
