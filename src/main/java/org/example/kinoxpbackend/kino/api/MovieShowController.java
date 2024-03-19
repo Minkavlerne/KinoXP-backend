@@ -19,13 +19,17 @@ public class MovieShowController {
     }
 
     @GetMapping
-    public ResponseEntity<List<MovieShowDto>> getAllMovieShows() {
+    public ResponseEntity<List<MovieShow>> getAllMovieShows() {
         return ResponseEntity.ok(movieShowService.getAllMovieShows());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MovieShowDto> getMovieShowById(@PathVariable int id) {
+    public ResponseEntity<MovieShow> getMovieShowById(@PathVariable int id) {
         return ResponseEntity.ok(movieShowService.getMovieShowById(id));
+    }
+   @PutMapping("/{id}")
+    public ResponseEntity<MovieShowDto> updateMovieShow(@PathVariable int id, @RequestBody MovieShowDto movieShowDto) {
+        return ResponseEntity.ok(movieShowService.updateMovieShow(id, movieShowDto));
     }
 
     @PostMapping

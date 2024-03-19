@@ -59,6 +59,7 @@ public class KinoXpBackendApplication {
 			movies.add(new Movie("The Shawshank Redemption", "Two imprisoned men bond over a number of years", "posterbase64", "posterUrl", "trailerUrl", 16, LocalTime.of(2, 22, 10, 0), LocalDate.of(1995, 4, 28)));
 			movies.add(new Movie("The Godfather", "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.", "posterbase64", "posterUrl", "trailerUrl", 16, LocalTime.of(2, 55, 10, 0), LocalDate.of(1972, 3, 24)));
 			movies.add(new Movie("The Dark Knight", "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.", "posterbase64", "posterUrl", "trailerUrl", 16, LocalTime.of(2, 32, 10, 0), LocalDate.of(2008, 7, 18)));
+			movies.add(new Movie("TEST", "TEST TEST TEST", "posterbase64", "posterUrl", "trailerUrl", 16, LocalTime.of(2, 32, 10, 0), LocalDate.of(2024, 7, 18)));
 
 			for (Movie movie: movies) {
 				movie.setCategories(categories);
