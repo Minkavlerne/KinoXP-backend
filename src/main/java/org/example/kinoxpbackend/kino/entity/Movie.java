@@ -30,7 +30,7 @@ public class Movie {
     @Column(nullable = false)
     private String description;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "LONGTEXT")
     private String posterBase64;
 
     @Column(nullable = false)
