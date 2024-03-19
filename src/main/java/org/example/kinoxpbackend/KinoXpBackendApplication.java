@@ -15,9 +15,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @SpringBootApplication
 public class KinoXpBackendApplication {
@@ -59,6 +59,7 @@ public class KinoXpBackendApplication {
 			movies.add(new Movie("The Shawshank Redemption", "Two imprisoned men bond over a number of years", "posterbase64", "posterUrl", "trailerUrl", 16, LocalTime.of(2, 22, 10, 0), LocalDate.of(1995, 4, 28)));
 			movies.add(new Movie("The Godfather", "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.", "posterbase64", "posterUrl", "trailerUrl", 16, LocalTime.of(2, 55, 10, 0), LocalDate.of(1972, 3, 24)));
 			movies.add(new Movie("The Dark Knight", "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.", "posterbase64", "posterUrl", "trailerUrl", 16, LocalTime.of(2, 32, 10, 0), LocalDate.of(2008, 7, 18)));
+			movies.add(new Movie("TEST", "TEST TEST TEST", "posterbase64", "posterUrl", "trailerUrl", 16, LocalTime.of(2, 32, 10, 0), LocalDate.of(2024, 7, 18)));
 
 			for (Movie movie: movies) {
 				movie.setCategories(categories);
@@ -83,6 +84,32 @@ public class KinoXpBackendApplication {
 				theaterRepository.save(theater);
 			}
 
+			List<MovieShow> movieShows = new ArrayList<>();
+			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-18 12:00:00"), Timestamp.valueOf("2024-03-18 12:00:00"), movies.get(0), theaters.get(0)));
+			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-18 12:00:00"), Timestamp.valueOf("2024-03-18 12:00:00"), movies.get(1), theaters.get(1)));
+			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-18 12:00:00"), Timestamp.valueOf("2024-03-18 12:00:00"), movies.get(2), theaters.get(2)));
+			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-18 12:00:00"), Timestamp.valueOf("2024-03-18 12:00:00"), movies.get(3), theaters.get(0)));
+			movieShowRepository.saveAll(movieShows);
+
+			List<Booking> bookings = new ArrayList<>();
+
+
+			Random random = new Random();
+
+			for (MovieShow movieShow: movieShows) {
+
+				List<Seat> allSeats = movieShow.getTheater().getSeats();
+
+				int numberOfSeatsToBook = random.nextInt(4) + 1;
+
+				List<Seat> seatsToBook = IntStream.range(0, numberOfSeatsToBook).mapToObj(allSeats::get).toList();
+
+				Booking booking = new Booking(movieShow, user1);
+				booking.setSeats(seatsToBook);
+
+				bookings.add(booking);
+			}
+			bookingRepository.saveAll(bookings);
 		};
 	}
 }

@@ -46,17 +46,22 @@ public class MovieService {
             if (request.getId() != id) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You cannot change the id of an existing movie");
             }
-        Movie movieToEdit = movieRepository.findById(id).orElseThrow(()
-                -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie not found"));
-        System.out.println(request.toString());
-        updateMovie(movieToEdit, request);
-        System.out.println(movieToEdit);
-        movieRepository.save(movieToEdit);
-        return new MovieDto(movieToEdit);
+            Movie movieToEdit = movieRepository.findById(id).orElseThrow(()
+                    -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie not found"));
+            System.out.println(request.toString());
+            updateMovie(movieToEdit, request);
+            System.out.println(movieToEdit);
+            movieRepository.save(movieToEdit);
+            return new MovieDto(movieToEdit);
         } catch (Exception e) {
             e.printStackTrace();
             throw e;
         }
+    }
+
+    public void deleteMovie(int id) {
+        Movie movie = movieRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie not found"));
+        movieRepository.delete(movie);
     }
 
     private void updateMovie(Movie movie, MovieDto movieDto) {

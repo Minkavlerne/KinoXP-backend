@@ -33,4 +33,11 @@ public class MovieShow {
 
     @ManyToOne
     private Theater theater;
+
+    public MovieShow(Timestamp startTime, Timestamp endTime, Movie movie, Theater theater) {
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.movie = movie;
+        this.theater = theater;
+    }
 }
