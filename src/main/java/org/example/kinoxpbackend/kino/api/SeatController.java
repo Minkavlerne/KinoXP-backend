@@ -20,7 +20,7 @@ public class SeatController {
         this.seatService = seatService;
     }
     @GetMapping
-    public ResponseEntity<List> getAllSeats(){
+    public ResponseEntity<List<Seat>> getAllSeats(){
         return ResponseEntity.ok(seatService.getAllSeats());
     }
     @GetMapping("/{id}")
