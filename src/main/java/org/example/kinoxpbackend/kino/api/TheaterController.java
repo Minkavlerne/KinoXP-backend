@@ -20,12 +20,12 @@ public class TheaterController {
 
 
     @GetMapping
-    public ResponseEntity<List<TheaterDto>> getAllTheaters() {
+    public ResponseEntity<List<Theater>> getAllTheaters() {
         return ResponseEntity.ok(theaterService.getAllTheaters());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TheaterDto> getTheaterById(@PathVariable int id) {
+    public ResponseEntity<Theater> getTheaterById(@PathVariable int id) {
         return ResponseEntity.ok(theaterService.getTheaterById(id));
     }
 

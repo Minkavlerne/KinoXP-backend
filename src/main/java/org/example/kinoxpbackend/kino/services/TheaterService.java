@@ -23,14 +23,13 @@ public class TheaterService {
         this.theaterRepository = theaterRepository;
     }
 
-    public List<TheaterDto> getAllTheaters() {
-        List<Theater> theaters = theaterRepository.findAll();
-        return theaters.stream().map(TheaterDto::new).collect(toList());
+    public List<Theater> getAllTheaters() {
+        return theaterRepository.findAll();
     }
 
-    public TheaterDto getTheaterById(int id) {
-        Theater theater = theaterRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Theater not found"));
-        return new TheaterDto(theater);
+    public Theater getTheaterById(int id) {
+        return theaterRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Theater not found"));
+
     }
 
   
