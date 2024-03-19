@@ -27,4 +27,11 @@ public class BookingController {
     public BookingDto getBookingById(@PathVariable int id) {
         return bookingService.getBookingById(id);
     }
+
+    @PostMapping
+    public BookingDto addBooking(@RequestBody BookingDto bookingDto) {
+        return bookingService.addBooking(bookingDto);
+    }
+
+
 }
