@@ -2,6 +2,7 @@ package org.example.kinoxpbackend.kino.services;
 
 import org.example.kinoxpbackend.kino.dto.MovieShowDto;
 import org.example.kinoxpbackend.kino.entity.MovieShow;
+import org.example.kinoxpbackend.kino.entity.Theater;
 import org.example.kinoxpbackend.kino.repository.MovieRepository;
 import org.example.kinoxpbackend.kino.repository.MovieShowRepository;
 import org.example.kinoxpbackend.kino.repository.TheaterRepository;
@@ -29,6 +30,11 @@ public class MovieShowService {
         public MovieShow getMovieShowById(int id) {
                 return movieShowRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie show not found"));
         }
+
+        public List<MovieShow> getAllMovieShowsByTheater(Theater theater) {
+                return movieShowRepository.findAllByTheater(theater);
+        }
+
         public MovieShowDto updateMovieShow(int id, MovieShowDto movieShowDto){
                 MovieShow movieShow = movieShowRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie show not found"));
                 convertToMovieShow(movieShow, movieShowDto);
