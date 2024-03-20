@@ -24,7 +24,7 @@ public class SeatController {
         return ResponseEntity.ok(seatService.getAllSeats());
     }
     @GetMapping("/{id}")
-    public ResponseEntity<SeatDto> getSeatById(@PathVariable int id){
+    public ResponseEntity<Seat> getSeatById(@PathVariable int id){
         return ResponseEntity.ok(seatService.getSeatById(id));
     }
     @PostMapping
