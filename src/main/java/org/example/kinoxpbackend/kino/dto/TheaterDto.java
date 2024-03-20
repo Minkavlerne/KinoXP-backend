@@ -15,10 +15,17 @@ public class TheaterDto {
     private int seatNumbers;
 
 
-
-    public TheaterDto(Theater theater){
+    public TheaterDto(Theater theater) {
         this.id = theater.getId();
         this.name = theater.getName();
+    }
+
+    public TheaterDto(Theater theater, int seatRows, int seatNumbers){
+        this.id = theater.getId();
+        this.name = theater.getName();
+        this.seatRows = seatRows;
+        this.seatNumbers = seatNumbers;
+
     }
 
 }

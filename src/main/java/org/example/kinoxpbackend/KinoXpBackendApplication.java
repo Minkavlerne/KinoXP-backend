@@ -46,16 +46,22 @@ public class KinoXpBackendApplication {
 			userWithRolesRepository.save(user2);
 
 			List<Category> categories = new ArrayList<>();
-			categories.add(new Category("Action"));
-			categories.add(new Category("Comedy"));
-			categories.add(new Category("Drama"));
-			categories.add(new Category("Horror"));
-			categories.add(new Category("Romance"));
+			Category action = new Category("Action");
+			Category comedy = new Category("Comedy");
+			Category drama = new Category("Drama");
+			Category horror = new Category("Horror");
+			Category romance = new Category("Romance");
+			categories.add(action);
+			categories.add(comedy);
+			categories.add(drama);
+			categories.add(horror);
+			categories.add(romance);
 			categoryRepository.saveAll(categories);
 
 
 			List<Movie> movies = new ArrayList<>();
-			movies.add(new Movie("The Matrix", "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.", "posterbase64", "https://m.media-amazon.com/images/I/71PfZFFz9yL._AC_UF894,1000_QL80_.jpg", "trailerUrl", 16, LocalTime.of(2, 16, 10, 0), LocalDate.of(1999, 5, 7)));
+			Movie matrix = new Movie("The Matrix", "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.", "posterbase64", "https://m.media-amazon.com/images/I/71PfZFFz9yL._AC_UF894,1000_QL80_.jpg", "trailerUrl", 16, LocalTime.of(2, 16, 10, 0), LocalDate.of(1999, 5, 7));
+			matrix.addCategory(action);
 			movies.add(new Movie("The Shawshank Redemption", "Two imprisoned men bond over a number of years", "posterbase64", "https://m.media-amazon.com/images/I/71715eBi1sL._AC_UF894,1000_QL80_.jpg", "trailerUrl", 16, LocalTime.of(2, 22, 10, 0), LocalDate.of(1995, 4, 28)));
 			movies.add(new Movie("The Godfather", "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.", "posterbase64", "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg", "trailerUrl", 16, LocalTime.of(2, 55, 10, 0), LocalDate.of(1972, 3, 24)));
 			movies.add(new Movie("The Dark Knight", "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.", "posterbase64", "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_.jpg", "trailerUrl", 16, LocalTime.of(2, 32, 10, 0), LocalDate.of(2008, 7, 18)));
@@ -66,7 +72,7 @@ public class KinoXpBackendApplication {
 			movies.add(new Movie("Civil War", "A journey across a dystopian future America, following a team of military-embedded journalists as they race against time to reach DC before rebel factions descend upon the White House.", "posterbase64", "https://m.media-amazon.com/images/M/MV5BYTYyODhlODktYjUzNC00NjUyLWI1MzYtNmI0MTY3YTUxYjY2XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg", "trailerUrl", 18, LocalTime.of(1, 49, 0, 0), LocalDate.of(2024, 4, 18)));
 			movies.add(new Movie("Garfield the Movie", "Garfield is about to go on a wild outdoor adventure. After an unexpected reunion with his long-lost father - the cat Vic - Garfield and Odie are forced to abandon their pampered life to join Vic in a hilarious, high-stakes heist.", "posterbase64", "https://m.media-amazon.com/images/M/MV5BMzJiMzhiOWQtMDljZS00MjViLWEwMzUtNzIxMTBmZGNkOWExXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg", "trailerUrl", 6, LocalTime.of(1, 20, 0, 0), LocalDate.of(2024, 5, 8)));
 			movies.add(new Movie("Kingdom of the Planet of the Apes", "Many years after the reign of Caesar, a young ape goes on a journey that will lead him to question everything he's been taught about the past and make choices that will define a future for apes and humans alike.", "posterbase64", "https://m.media-amazon.com/images/M/MV5BNDcxM2RiOWMtMGEzMC00NDEyLTgzMjEtOWZjYzVhN2E2ZjcyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg", "trailerUrl", 12, LocalTime.of(2, 10, 0, 0), LocalDate.of(2024, 5, 8)));
-
+			movieRepository.save(matrix);
 
 			for (Movie movie: movies) {
 				movie.setCategories(categories);

@@ -4,6 +4,7 @@ import org.example.kinoxpbackend.kino.dto.SeatDto;
 import org.example.kinoxpbackend.kino.dto.TheaterDto;
 import org.example.kinoxpbackend.kino.entity.Seat;
 import org.example.kinoxpbackend.kino.entity.Theater;
+import org.example.kinoxpbackend.kino.repository.SeatRepository;
 import org.example.kinoxpbackend.kino.repository.TheaterRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -15,10 +16,12 @@ import java.util.List;
 @Service
 public class TheaterService {
     private final TheaterRepository theaterRepository;
+    private final SeatRepository seatRepository;
     private final SeatService seatService;
 
-    public TheaterService(TheaterRepository theaterRepository, SeatService seatService) {
+    public TheaterService(TheaterRepository theaterRepository, SeatService seatService, SeatRepository seatRepository) {
         this.theaterRepository = theaterRepository;
+        this.seatRepository = seatRepository;
         this.seatService = seatService;
     }
 
@@ -50,7 +53,7 @@ public class TheaterService {
         }
         theater.setSeats(newSeats);
         theaterRepository.save(theater);
-        return new TheaterDto(theater);
+        return new TheaterDto(theater, theaterDto.getSeatRows(), theaterDto.getSeatNumbers());
     }
 
     public TheaterDto updateTheater(int id, TheaterDto theaterDto){

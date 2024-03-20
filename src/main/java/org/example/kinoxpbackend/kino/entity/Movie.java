@@ -62,6 +62,16 @@ public class Movie {
     @JsonBackReference
     private List<Category> categories = new ArrayList<>();
 
+    public void addCategory(Category category) {
+        categories.add(category);
+        category.getMovies().add(this);
+    }
+
+    public void removeCategory(Category category) {
+        categories.remove(category);
+        category.getMovies().remove(this);
+    }
+
     public Movie(String title, String description, String posterBase64, String posterUrl, String trailerUrl, int ageLimit, LocalTime duration, LocalDate releaseDate) {
         this.title = title;
         this.description = description;

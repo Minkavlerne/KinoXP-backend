@@ -29,7 +29,7 @@ public class Theater {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Seat> seats = new ArrayList<>();
 
     public Theater(String name) {
