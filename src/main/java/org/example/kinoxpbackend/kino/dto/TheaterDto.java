@@ -11,12 +11,20 @@ import org.example.kinoxpbackend.kino.entity.Theater;
 public class TheaterDto {
     private int id;
     private String name;
+    private int seatRows;
+    private int seatNumbers;
 
 
-
-    public TheaterDto(Theater theater){
+    public TheaterDto(Theater theater) {
         this.id = theater.getId();
         this.name = theater.getName();
+    }
+
+    public TheaterDto(Theater theater, int seatRows, int seatNumbers){
+        this.id = theater.getId();
+        this.name = theater.getName();
+        this.seatRows = seatRows;
+        this.seatNumbers = seatNumbers;
 
     }
 

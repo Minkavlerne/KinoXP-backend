@@ -24,9 +24,8 @@ public class SeatService {
         return seatRepository.findAll();
     }
 
-    public SeatDto getSeatById(int id){
-        Seat seat = seatRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Seat not found"));
-        return new SeatDto(seat);
+    public Seat getSeatById(int id){
+        return seatRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Seat not found"));
     }
 
     public SeatDto createSeat(SeatDto seatDto){
@@ -47,4 +46,5 @@ public class SeatService {
     public void deleteSeat(int id){
         seatRepository.deleteById(id);
     }
+
 }
