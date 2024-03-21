@@ -99,6 +99,9 @@ public class KinoXpBackendApplication {
 
 			List<MovieShow> movieShows = new ArrayList<>();
 			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-18 12:00:00"), Timestamp.valueOf("2024-03-18 12:00:00"), movies.get(0), theaters.get(0)));
+			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-18 12:00:00"), Timestamp.valueOf("2024-03-18 12:00:00"), movies.get(0), theaters.get(0)));
+			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-18 12:00:00"), Timestamp.valueOf("2024-03-18 12:00:00"), movies.get(0), theaters.get(0)));
+			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-18 12:00:00"), Timestamp.valueOf("2024-03-18 12:00:00"), movies.get(0), theaters.get(0)));
 			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-18 12:00:00"), Timestamp.valueOf("2024-03-18 12:00:00"), movies.get(1), theaters.get(1)));
 			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-18 12:00:00"), Timestamp.valueOf("2024-03-18 12:00:00"), movies.get(2), theaters.get(2)));
 			movieShows.add(new MovieShow(Timestamp.valueOf("2024-03-18 12:00:00"), Timestamp.valueOf("2024-03-18 12:00:00"), movies.get(3), theaters.get(0)));
