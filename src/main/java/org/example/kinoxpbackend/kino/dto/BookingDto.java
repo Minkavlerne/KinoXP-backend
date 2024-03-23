@@ -14,14 +14,12 @@ import java.util.List;
 @NoArgsConstructor
 public class BookingDto {
     private int id;
-    private String bookingNumber;
     private int movieShowId;
     private String userName;
     private List<Integer> seatIds;
 
     public BookingDto(Booking booking) {
         this.id = booking.getId();
-        this.bookingNumber = booking.getBookingNumber();
         this.movieShowId = booking.getMovieShow().getId();
         this.userName = booking.getUser().getUsername();
         this.seatIds = booking.getSeats().stream().map(Seat::getId).toList();
