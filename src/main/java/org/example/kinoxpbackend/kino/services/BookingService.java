@@ -44,6 +44,11 @@ public class BookingService {
         return new BookingDto(booking);
     }
 
+    public List<BookingDto> getBookingByMovieShowId(int id) {
+        List<Booking> bookings = bookingRepository.findAllByMovieShowId(id);
+        return bookings.stream().map(BookingDto::new).collect(java.util.stream.Collectors.toList());
+    }
+
     public BookingDto addBooking(BookingDto bookingDto) {
         Booking booking = new Booking();
         convertToBooking(bookingDto, booking);

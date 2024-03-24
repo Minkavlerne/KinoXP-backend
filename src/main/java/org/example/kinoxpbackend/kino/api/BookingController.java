@@ -29,6 +29,11 @@ public class BookingController {
         return bookingService.getBookingById(id);
     }
 
+    @GetMapping("/movieshow/{id}")
+    public List<BookingDto> getBookingByMovieShowId(@PathVariable int id) {
+        return bookingService.getBookingByMovieShowId(id);
+    }
+
     @PostMapping
     public BookingDto addBooking(@RequestBody BookingDto bookingDto) {
         return bookingService.addBooking(bookingDto);
